@@ -1,5 +1,6 @@
 import { BedDouble, CarFront, Eye, Ruler, type LucideIcon } from "lucide-react";
 import { highlights } from "@/lib/content";
+import { Reveal } from "@/components/reveal";
 
 const icons: Record<string, LucideIcon> = {
   BedDouble,
@@ -11,7 +12,7 @@ const icons: Record<string, LucideIcon> = {
 export function HighlightsBar() {
   return (
     <section aria-label="Destaques do empreendimento" className="relative z-20 mx-auto -mt-12 w-full max-w-7xl px-6 lg:px-12">
-      <div className="grid grid-cols-2 gap-8 divide-y divide-outline-variant/20 rounded-xl bg-primary-container p-8 text-on-primary-container shadow-2xl md:grid-cols-4 md:divide-x md:divide-y-0 lg:p-12">
+      <Reveal className="grid grid-cols-2 gap-8 divide-y divide-outline-variant/20 rounded-xl bg-primary-container p-8 text-on-primary-container shadow-2xl md:grid-cols-4 md:divide-x md:divide-y-0 lg:p-12">
         {highlights.map((item) => {
           const Icon = icons[item.icon];
           return (
@@ -24,7 +25,7 @@ export function HighlightsBar() {
             </div>
           );
         })}
-      </div>
+      </Reveal>
     </section>
   );
 }

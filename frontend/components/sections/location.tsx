@@ -1,5 +1,6 @@
 import { Plane, UtensilsCrossed, MapPin } from "lucide-react";
 import { site } from "@/lib/content";
+import { Reveal } from "@/components/reveal";
 
 const points = [
   { icon: MapPin, text: site.address },
@@ -15,7 +16,10 @@ export function Location() {
       className="bg-surface-container-high py-space-xl"
     >
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-12 lg:px-12">
-        <div className="flex flex-col lg:col-span-5">
+        <Reveal
+          variants={{ hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0 } }}
+          className="flex flex-col lg:col-span-5"
+        >
           <span className="mb-space-xs text-label-md uppercase tracking-[0.2em] text-secondary">
             Localização Privilegiada
           </span>
@@ -36,9 +40,9 @@ export function Location() {
               </li>
             ))}
           </ul>
-        </div>
+        </Reveal>
 
-        <div className="overflow-hidden rounded-xl shadow-2xl lg:col-span-7">
+        <Reveal delay={0.15} className="overflow-hidden rounded-xl shadow-2xl lg:col-span-7">
           <iframe
             title="Mapa de localização do Reserva Imperiale em São Paulo"
             src="https://www.google.com/maps?q=Avenida+Paulista,Sao+Paulo&output=embed"
@@ -46,7 +50,7 @@ export function Location() {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
-        </div>
+        </Reveal>
       </div>
     </section>
   );

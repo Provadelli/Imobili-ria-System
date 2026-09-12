@@ -45,7 +45,7 @@ export function SiteHeader() {
             <a
               key={link.href}
               href={link.href}
-              className="text-body-sm tracking-wide text-on-surface-variant transition-colors hover:text-on-surface focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
+              className="relative text-body-sm tracking-wide text-on-surface-variant transition-colors after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-secondary after:transition-all after:duration-300 hover:text-on-surface hover:after:w-full focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring"
             >
               {link.label}
             </a>
@@ -53,7 +53,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-space-sm">
-          <Button asChild className="hidden text-label-md tracking-wider uppercase sm:inline-flex">
+          <Button
+            asChild
+            variant="accent"
+            size="lg"
+            className="hidden h-10 px-6 text-label-md tracking-wider uppercase sm:inline-flex"
+          >
             <a href="#contato">Agendar Visita</a>
           </Button>
           <div
@@ -91,7 +96,7 @@ export function SiteHeader() {
                 ))}
               </nav>
               <div className="mt-auto p-4">
-                <Button asChild className="w-full uppercase tracking-wider">
+                <Button asChild variant="accent" size="lg" className="h-11 w-full uppercase tracking-wider">
                   <a href="#contato">Agendar Visita</a>
                 </Button>
               </div>

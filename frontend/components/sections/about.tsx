@@ -1,11 +1,15 @@
 import Image from "next/image";
 import { aboutStats } from "@/lib/content";
+import { Reveal } from "@/components/reveal";
 
 export function About() {
   return (
     <section id="sobre" aria-labelledby="sobre-heading" className="bg-surface py-space-xl">
       <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 lg:grid-cols-12 lg:gap-16 lg:px-12">
-        <div className="relative h-80 overflow-hidden rounded-xl shadow-xl lg:col-span-5 lg:h-[420px]">
+        <Reveal
+          variants={{ hidden: { opacity: 0, x: -24 }, visible: { opacity: 1, x: 0 } }}
+          className="relative h-80 overflow-hidden rounded-xl shadow-xl lg:col-span-5 lg:h-[420px]"
+        >
           <Image
             src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1000&q=80"
             alt="Equipe de arquitetos e consultores da Atelier Residences reunida em um escritório sofisticado."
@@ -13,9 +17,9 @@ export function About() {
             sizes="(min-width: 1024px) 40vw, 90vw"
             className="object-cover"
           />
-        </div>
+        </Reveal>
 
-        <div className="lg:col-span-7">
+        <Reveal delay={0.15} className="lg:col-span-7">
           <span className="mb-space-xs block text-label-md uppercase tracking-[0.2em] text-secondary">
             Sobre a Atelier Residences
           </span>
@@ -44,7 +48,7 @@ export function About() {
               </div>
             ))}
           </dl>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

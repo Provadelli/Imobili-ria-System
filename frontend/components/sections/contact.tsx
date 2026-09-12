@@ -3,6 +3,7 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { contactTopics, site } from "@/lib/content";
+import { Reveal } from "@/components/reveal";
 
 export function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -14,7 +15,7 @@ export function Contact() {
 
   return (
     <section id="contato" aria-labelledby="contato-heading" className="mx-auto max-w-5xl px-6 py-space-xl lg:px-12">
-      <div className="relative overflow-hidden rounded-2xl bg-primary-container p-8 text-on-primary-container shadow-2xl lg:p-16">
+      <Reveal className="relative overflow-hidden rounded-2xl bg-primary-container p-8 text-on-primary-container shadow-2xl lg:p-16">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -bottom-20 -right-20 size-96 rounded-full bg-secondary/10 blur-3xl"
@@ -135,7 +136,7 @@ export function Contact() {
           Prefere falar agora? Ligue para {site.phone} ou fale pelo WhatsApp{" "}
           {site.whatsapp}.
         </p>
-      </div>
+      </Reveal>
     </section>
   );
 }
