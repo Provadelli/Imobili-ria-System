@@ -1,92 +1,91 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import { motion } from "motion/react";
+import { useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDown } from "lucide-react";
-import { heroWords } from "@/lib/content";
+import { Button } from "@/components/ui/button";
+import { heroImage } from "@/lib/content";
 
 export function Hero() {
-  const [wordIndex, setWordIndex] = useState(0);
-  const words = useMemo(() => heroWords, []);
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setWordIndex((prev) => (prev + 1) % words.length);
-    }, 2200);
-    return () => clearInterval(id);
-  }, [words]);
+  const ref = useRef<HTMLElement>(null);
+  const reduceMotion = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
+  const imageY = useTransform(scrollYProgress, [0, 1], ["0%", reduceMotion ? "0%" : "18%"]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", reduceMotion ? "0%" : "-25%"]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
 
   return (
     <section
       id="hero"
-      className="relative flex min-h-[92vh] w-full items-center justify-center overflow-hidden"
+      ref={ref}
+      aria-labelledby="hero-title"
+      className="on-dark relative isolate flex h-[100svh] min-h-[620px] w-full items-end overflow-hidden bg-ink text-cream"
     >
-      <div className="absolute inset-0 z-0">
-        <div
-          className="h-full w-full bg-cover bg-center brightness-75"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1800&q=80')",
-          }}
-          role="img"
-          aria-label="Fachada de arranha-céu de luxo iluminada ao entardecer, com varandas amplas e paisagismo sofisticado."
-        />
-        <div className="absolute inset-0 bg-primary/50" />
-        <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/70 to-primary/20" />
-      </div>
+      <motion.div className="absolute inset-0 -z-10" style={{ y: imageY }}>
+        <div className="relative h-full w-full motion-safe:animate-ken-burns">
+          <Image
+            src={heroImage.src}
+            alt={heroImage.alt}
+            fill
+            preload
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+        {/* Gradientes garantem contraste do texto (WCAG 1.4.3) */}
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/30" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/60 via-transparent to-transparent" />
+      </motion.div>
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col items-center px-6 py-24 text-center lg:px-12">
-        <span className="mb-space-sm text-label-md font-medium uppercase tracking-[0.25em] text-secondary-fixed">
-          Atelier Residences Apresenta
-        </span>
-
-        <h1 className="mb-space-md max-w-4xl text-[42px] tracking-tight text-surface lg:text-headline-xl">
-          Reserva Imperiale: o ápice da{" "}
-          <span className="relative inline-flex h-[1.15em] w-[9.5ch] justify-center align-bottom overflow-hidden text-left align-baseline sm:w-[10.5ch]">
-            {words.map((word, index) => (
-              <motion.span
-                key={word}
-                className="absolute font-semibold text-secondary-fixed"
-                initial={{ opacity: 0, y: 40 }}
-                animate={
-                  wordIndex === index
-                    ? { y: 0, opacity: 1 }
-                    : { y: wordIndex > index ? -40 : 40, opacity: 0 }
-                }
-                transition={{ type: "spring", stiffness: 60, damping: 14 }}
-              >
-                {word}
-              </motion.span>
-            ))}
-          </span>{" "}
-          e exclusividade
-        </h1>
-
-        <p className="mb-space-lg max-w-2xl font-light text-body-lg text-surface-variant">
-          Uma obra-prima arquitetônica concebida para poucos. Viver aqui é redefinir o
-          conceito de lar através de uma experiência sensorial incomparável.
+      <motion.div
+        style={{ y: contentY, opacity: contentOpacity }}
+        className="mx-auto w-full max-w-[90rem] px-5 pb-14 sm:px-8 lg:px-12 lg:pb-20"
+      >
+        <p className="eyebrow mb-8 flex motion-safe:animate-fade-rise [animation-delay:200ms] items-center gap-4 text-champagne">
+          <span>Reserva Imperiale</span>
+          <span aria-hidden="true" className="h-px w-10 bg-current opacity-60" />
+          <span>Lançamento 2028</span>
         </p>
 
-        <div className="flex flex-col items-center gap-space-sm sm:flex-row">
-          <a
-            href="#contato"
-            className="rounded bg-secondary-container px-space-lg py-4 text-label-md font-medium uppercase tracking-wider text-on-secondary-container shadow-xl transition-all hover:bg-surface hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-fixed"
-          >
-            Agendar Visita Exclusiva
-          </a>
-          <a
-            href="#empreendimento"
-            className="rounded border border-surface/30 px-space-lg py-4 text-label-md uppercase tracking-wider text-surface transition-all hover:bg-surface/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-surface"
-          >
-            Explorar Projeto
-          </a>
-        </div>
-      </div>
+        <h1 id="hero-title" className="font-display text-display font-light">
+          {["A arte de", "morar acima."].map((line, i) => (
+            <span key={line} className="block overflow-hidden pb-[0.06em]">
+              {/* Animações de entrada em CSS: rodam antes da hidratação e não atrasam o LCP */}
+              <span
+                className={`block motion-safe:animate-mask-up ${i === 1 ? "italic" : ""}`}
+                style={{ animationDelay: `${350 + i * 120}ms` }}
+              >
+                {line}
+              </span>
+            </span>
+          ))}
+        </h1>
 
-      <div className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-space-xs text-surface/60 motion-safe:animate-bounce">
-        <span className="text-label-sm uppercase tracking-widest">Descubra</span>
-        <ArrowDown className="size-4" aria-hidden="true" />
-      </div>
+        <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between">
+          <p className="max-w-sm text-base leading-relaxed text-cream/80 motion-safe:animate-rise [animation-delay:700ms]">
+            Coberturas, gardens e andares inteiros com arquitetura autoral, no endereço mais
+            desejado de São Paulo.
+          </p>
+
+          <div className="flex items-center gap-6 motion-safe:animate-fade-rise [animation-delay:900ms]">
+            <Button asChild variant="pill-light" size="pill-lg">
+              <Link href="#manifesto">Descobrir o projeto</Link>
+            </Button>
+            <Link
+              href="#manifesto"
+              aria-label="Rolar para a próxima seção"
+              className="hidden flex-col items-center gap-3 text-cream/70 transition-colors hover:text-cream md:flex"
+            >
+              <span aria-hidden="true" className="relative block h-14 w-px overflow-hidden bg-cream/20">
+                <span className="absolute inset-0 bg-cream motion-safe:animate-scroll-line" />
+              </span>
+              <ArrowDown className="size-4" aria-hidden="true" />
+            </Link>
+          </div>
+        </div>
+      </motion.div>
     </section>
   );
 }

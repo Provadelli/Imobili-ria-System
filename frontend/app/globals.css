@@ -8,22 +8,10 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
-  --font-heading: var(--font-heading);
-  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-display);
+  --font-display: var(--font-display);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -49,160 +37,140 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* Luxury real estate design system — extended palette */
-  --color-surface: var(--surface);
-  --color-surface-dim: var(--surface-dim);
-  --color-surface-bright: var(--surface-bright);
-  --color-surface-container-lowest: var(--surface-container-lowest);
-  --color-surface-container-low: var(--surface-container-low);
-  --color-surface-container: var(--surface-container);
-  --color-surface-container-high: var(--surface-container-high);
-  --color-surface-container-highest: var(--surface-container-highest);
-  --color-surface-variant: var(--surface-variant);
-  --color-on-surface: var(--on-surface);
-  --color-on-surface-variant: var(--on-surface-variant);
-  --color-inverse-surface: var(--inverse-surface);
-  --color-inverse-on-surface: var(--inverse-on-surface);
-  --color-outline: var(--outline);
-  --color-outline-variant: var(--outline-variant);
-  --color-primary-container: var(--primary-container);
-  --color-on-primary-container: var(--on-primary-container);
-  --color-inverse-primary: var(--inverse-primary);
-  --color-secondary-container: var(--secondary-container);
-  --color-on-secondary-container: var(--on-secondary-container);
-  --color-secondary-fixed: var(--secondary-fixed);
-  --color-on-secondary-fixed: var(--on-secondary-fixed);
-  --color-tertiary: var(--tertiary);
-  --color-on-tertiary: var(--on-tertiary);
+  /* Atelier — paleta editorial */
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-cream: var(--cream);
+  --color-sand: var(--sand);
+  --color-linen: var(--linen);
+  --color-stone: var(--stone);
+  --color-bronze: var(--bronze);
+  --color-champagne: var(--champagne);
+  --color-line: var(--line);
 
-  --text-headline-xl: 48px;
-  --text-headline-xl--line-height: 56px;
-  --text-headline-xl--letter-spacing: -0.01em;
-  --text-headline-xl--font-weight: 500;
-  --text-headline-lg: 36px;
-  --text-headline-lg--line-height: 44px;
-  --text-headline-lg--font-weight: 500;
-  --text-headline-md: 28px;
-  --text-headline-md--line-height: 36px;
-  --text-headline-md--font-weight: 400;
-  --text-headline-sm: 22px;
-  --text-headline-sm--line-height: 28px;
-  --text-headline-sm--font-weight: 400;
-  --text-body-lg: 18px;
-  --text-body-lg--line-height: 28px;
-  --text-body-md: 15px;
-  --text-body-md--line-height: 24px;
-  --text-body-sm: 13px;
-  --text-body-sm--line-height: 20px;
-  --text-label-md: 12px;
-  --text-label-md--line-height: 16px;
-  --text-label-md--letter-spacing: 0.08em;
-  --text-label-md--font-weight: 500;
-  --text-label-sm: 10px;
-  --text-label-sm--line-height: 14px;
-  --text-label-sm--letter-spacing: 0.1em;
-  --text-label-sm--font-weight: 500;
+  /* Escala tipográfica fluida */
+  --text-display: clamp(3rem, 1.6rem + 6.4vw, 8.5rem);
+  --text-display--line-height: 0.95;
+  --text-display--letter-spacing: -0.02em;
+  --text-title: clamp(2.25rem, 1.5rem + 3.2vw, 4.75rem);
+  --text-title--line-height: 1.02;
+  --text-title--letter-spacing: -0.015em;
+  --text-subtitle: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
+  --text-subtitle--line-height: 1.15;
+  --text-eyebrow: 0.75rem;
+  --text-eyebrow--line-height: 1rem;
+  --text-eyebrow--letter-spacing: 0.3em;
 
-  --spacing-gutter: 2rem;
-  --spacing-margin: 3rem;
-  --spacing-space-xs: 0.5rem;
-  --spacing-space-sm: 1rem;
-  --spacing-space-md: 2rem;
-  --spacing-space-lg: 4rem;
-  --spacing-space-xl: 6rem;
+  --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-ken-burns: ken-burns 18s var(--ease-lux) both;
+  --animate-scroll-line: scroll-line 2.4s var(--ease-lux) infinite;
+
+  --animate-mask-up: mask-up 1.4s var(--ease-lux) both;
+  --animate-rise: rise 1.2s var(--ease-lux) both;
+  --animate-fade-rise: fade-rise 1.2s var(--ease-lux) both;
+
+  @keyframes mask-up {
+    from {
+      translate: 0 110%;
+    }
+  }
+  @keyframes rise {
+    from {
+      translate: 0 24px;
+    }
+  }
+  @keyframes fade-rise {
+    from {
+      opacity: 0;
+      translate: 0 24px;
+    }
+  }
+  @keyframes ken-burns {
+    from {
+      scale: 1.12;
+    }
+    to {
+      scale: 1;
+    }
+  }
+  @keyframes scroll-line {
+    0% {
+      transform: scaleY(0);
+      transform-origin: top;
+    }
+    45% {
+      transform: scaleY(1);
+      transform-origin: top;
+    }
+    55% {
+      transform: scaleY(1);
+      transform-origin: bottom;
+    }
+    100% {
+      transform: scaleY(0);
+      transform-origin: bottom;
+    }
+  }
 }
 
 :root {
-  --background: #fcf9f3;
-  --foreground: #1c1c18;
+  /* Todos os pares de texto/fundo usados verificados para WCAG AA (≥ 4.5:1). */
+  --ink: #150d0a;
+  --ink-soft: #2c221e;
+  --cream: #fcf9f3;
+  --sand: #f3efe7;
+  --linen: #e9e3d8;
+  --stone: #5a4f4a; /* 7.4:1 sobre cream */
+  --bronze: #725b38; /* 6.1:1 sobre cream */
+  --champagne: #c9ad84; /* 8.6:1 sobre ink */
+  --line: #d9cfc4;
+
+  --background: var(--cream);
+  --foreground: var(--ink);
   --card: #ffffff;
-  --card-foreground: #1c1c18;
+  --card-foreground: var(--ink);
   --popover: #ffffff;
-  --popover-foreground: #1c1c18;
-  --primary: #150d0a;
-  --primary-foreground: #ffffff;
-  --secondary: #fedeb2;
-  --secondary-foreground: #78603e;
-  --muted: #f0eee8;
-  --muted-foreground: #4e4541;
-  --accent: #ebe8e2;
-  --accent-foreground: #1c1c18;
-  --destructive: #ba1a1a;
-  --border: #d2c4bf;
-  --input: #d2c4bf;
-  --ring: #807571;
-  --chart-1: #725b38;
-  --chart-2: #c5a880;
-  --chart-3: #2c221e;
-  --chart-4: #d4c3bd;
-  --chart-5: #78603e;
-  --radius: 0.5rem;
-  --sidebar: #f6f3ed;
-  --sidebar-foreground: #1c1c18;
-  --sidebar-primary: #150d0a;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #ebe8e2;
-  --sidebar-accent-foreground: #1c1c18;
-  --sidebar-border: #d2c4bf;
-  --sidebar-ring: #807571;
-
-  --surface: #fcf9f3;
-  --surface-dim: #dcdad4;
-  --surface-bright: #fcf9f3;
-  --surface-container-lowest: #ffffff;
-  --surface-container-low: #f6f3ed;
-  --surface-container: #f0eee8;
-  --surface-container-high: #ebe8e2;
-  --surface-container-highest: #e5e2dc;
-  --surface-variant: #e5e2dc;
-  --on-surface: #1c1c18;
-  --on-surface-variant: #4e4541;
-  --inverse-surface: #31312d;
-  --inverse-on-surface: #f3f0ea;
-  --outline: #807571;
-  --outline-variant: #d2c4bf;
-  --primary-container: #2c221e;
-  --on-primary-container: #f1dfd8;
-  --inverse-primary: #d4c3bd;
-  --secondary-container: #fedeb2;
-  --on-secondary-container: #78603e;
-  --secondary-fixed: #fedeb2;
-  --on-secondary-fixed: #281800;
-  --tertiary: #0a1011;
-  --on-tertiary: #ffffff;
-}
-
-.dark {
-  --background: #1c1c18;
-  --foreground: #f3f0ea;
-  --card: #2c221e;
-  --card-foreground: #f3f0ea;
-  --popover: #2c221e;
-  --popover-foreground: #f3f0ea;
-  --primary: #f1dfd8;
-  --primary-foreground: #150d0a;
-  --secondary: #584323;
-  --secondary-foreground: #fedeb2;
-  --muted: #31312d;
-  --muted-foreground: #c9c2ba;
-  --accent: #31312d;
-  --accent-foreground: #f3f0ea;
-  --destructive: #ffb4ab;
-  --border: #4e4541;
-  --input: #4e4541;
-  --ring: #978883;
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--cream);
+  --secondary: var(--linen);
+  --secondary-foreground: var(--ink);
+  --muted: var(--sand);
+  --muted-foreground: var(--stone);
+  --accent: var(--linen);
+  --accent-foreground: var(--ink);
+  --destructive: #b3261e;
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--bronze);
+  --radius: 0.75rem;
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
   html {
     @apply font-sans scroll-smooth;
+    -webkit-text-size-adjust: 100%;
   }
+  body {
+    @apply bg-background text-foreground;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--champagne);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--bronze);
+    outline-offset: 3px;
+  }
+  .on-dark :focus-visible {
+    outline-color: var(--champagne);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -215,5 +183,73 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer components {
+  /* Rótulo editorial (ex.: "01 — Residências") */
+  .eyebrow {
+    @apply text-eyebrow font-medium uppercase;
+  }
+
+  /*
+   * Botão "fill on hover": transparente em repouso; um círculo cresce
+   * a partir do centro no hover/foco e preenche o botão.
+   * A cor do preenchimento vem de --fill.
+   */
+  .fill-hover {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+      color 0.5s var(--ease-lux),
+      border-color 0.5s var(--ease-lux);
+  }
+  .fill-hover::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: -1;
+    width: max(150%, 7rem);
+    aspect-ratio: 1;
+    border-radius: 9999px;
+    background: var(--fill, currentColor);
+    translate: -50% -50%;
+    scale: 0;
+    transition: scale 0.65s var(--ease-lux);
+  }
+  .fill-hover:hover::before,
+  .fill-hover:focus-visible::before,
+  .fill-hover[aria-pressed="true"]::before,
+  .fill-hover[aria-selected="true"]::before {
+    scale: 1;
+  }
+
+  /* Texto em contorno, usado em títulos inativos */
+  .text-outline {
+    color: transparent;
+    -webkit-text-stroke: 1px currentColor;
+  }
+
+  /* Linha animada sob links de texto */
+  .link-underline {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.5s var(--ease-lux);
+  }
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /* Barra de rolagem oculta em trilhos de carrossel */
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

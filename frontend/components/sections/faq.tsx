@@ -4,30 +4,30 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Eyebrow, MaskText, Reveal } from "@/components/reveal";
 import { faqs } from "@/lib/content";
-import { Reveal } from "@/components/reveal";
 
 export function Faq() {
   return (
-    <section id="faq" aria-labelledby="faq-heading" className="bg-surface py-space-xl">
-      <div className="mx-auto max-w-3xl px-6 lg:px-12">
-        <Reveal className="mb-space-lg text-center">
-          <span className="mb-space-xs block text-label-md uppercase tracking-[0.2em] text-secondary">
-            Perguntas Frequentes
-          </span>
-          <h2 id="faq-heading" className="font-heading text-headline-lg text-primary">
-            Tudo o que você precisa saber
-          </h2>
-        </Reveal>
+    <section id="faq" aria-labelledby="faq-title" className="bg-cream py-28 lg:py-40">
+      <div className="mx-auto grid max-w-[90rem] gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
+        <div className="lg:col-span-4">
+          <Eyebrow index="09">Dúvidas</Eyebrow>
+          <MaskText
+            id="faq-title"
+            lines={["Perguntas", <em key="i" className="italic">frequentes.</em>]}
+            className="mt-6 font-display text-title font-light"
+          />
+        </div>
 
-        <Reveal delay={0.1}>
-          <Accordion type="single" collapsible className="gap-2">
+        <Reveal delay={0.1} className="lg:col-span-8">
+          <Accordion type="single" collapsible className="border-t border-line">
             {faqs.map((faq) => (
-              <AccordionItem key={faq.question} value={faq.question} className="border-outline-variant/30">
-                <AccordionTrigger className="font-heading text-headline-sm text-primary hover:no-underline">
+              <AccordionItem key={faq.question} value={faq.question} className="border-b border-line">
+                <AccordionTrigger className="items-center gap-6 rounded-none py-7 font-display text-2xl font-normal hover:no-underline lg:text-3xl **:data-[slot=accordion-trigger-icon]:size-5 **:data-[slot=accordion-trigger-icon]:text-ink">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-body-md text-on-surface-variant">
+                <AccordionContent className="max-w-2xl pb-8 text-base leading-relaxed text-stone">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

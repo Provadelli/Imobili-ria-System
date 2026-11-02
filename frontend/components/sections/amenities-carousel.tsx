@@ -3,187 +3,161 @@
 import { useEffect, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "motion/react";
-import { ChevronLeft, ChevronRight, Dumbbell, PlaneTakeoff, Sparkles, Wine, type LucideIcon } from "lucide-react";
+import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import type { amenities } from "@/lib/content";
 
-const icons: Record<string, LucideIcon> = {
-  Wine,
-  Sparkles,
-  Dumbbell,
-  PlaneTakeoff,
-};
+const EASE = [0.22, 1, 0.36, 1] as const;
+const DRAG_THRESHOLD = 110;
+const AUTOPLAY_MS = 6000;
 
-const variants = {
-  enter: (dir: number) => ({ x: dir > 0 ? 60 : -60, opacity: 0 }),
-  center: { x: 0, opacity: 1 },
-  exit: (dir: number) => ({ x: dir > 0 ? -60 : 60, opacity: 0 }),
-};
-
-const SWIPE_THRESHOLD = 8000;
-
+/**
+ * Carrossel em pilha: a carta do topo pode ser arrastada para os lados
+ * e vai para o fundo do baralho. Teclado: setas ← →. Autoplay com pausa
+ * explícita (WCAG 2.2.2) e pausa automática em hover/foco.
+ */
 export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
   const [index, setIndex] = useState(0);
-  const [direction, setDirection] = useState(1);
-  const [paused, setPaused] = useState(false);
-  const reducedMotion = useReducedMotion();
+  const [playing, setPlaying] = useState(true);
+  const [hovered, setHovered] = useState(false);
+  const reduceMotion = useReducedMotion();
+  const n = items.length;
+  const autoplay = playing && !hovered && !reduceMotion;
 
   useEffect(() => {
-    if (paused || reducedMotion) return;
-    const id = setInterval(() => {
-      setDirection(1);
-      setIndex((prev) => (prev + 1) % items.length);
-    }, 5500);
+    if (!autoplay) return;
+    const id = setInterval(() => setIndex((i) => (i + 1) % n), AUTOPLAY_MS);
     return () => clearInterval(id);
-  }, [paused, reducedMotion, items.length]);
+  }, [autoplay, n]);
 
-  function goTo(nextIndex: number) {
-    setDirection(nextIndex > index || (index === items.length - 1 && nextIndex === 0) ? 1 : -1);
-    setIndex(((nextIndex % items.length) + items.length) % items.length);
-  }
+  const next = () => setIndex((i) => (i + 1) % n);
+  const prev = () => setIndex((i) => (i - 1 + n) % n);
 
-  function handlePrev() {
-    setDirection(-1);
-    setIndex((prev) => (prev - 1 + items.length) % items.length);
-  }
-
-  function handleNext() {
-    setDirection(1);
-    setIndex((prev) => (prev + 1) % items.length);
-  }
-
-  function handleKeyDown(event: KeyboardEvent<HTMLDivElement>) {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      handlePrev();
-    } else if (event.key === "ArrowRight") {
-      event.preventDefault();
-      handleNext();
+  function onDragEnd(_: unknown, info: PanInfo) {
+    if (Math.abs(info.offset.x) > DRAG_THRESHOLD || Math.abs(info.velocity.x) > 600) {
+      if (info.offset.x < 0) next();
+      else prev();
     }
   }
 
-  function handleDragEnd(_: unknown, info: PanInfo) {
-    setPaused(false);
-    const swipePower = Math.abs(info.offset.x) * info.velocity.x;
-    if (swipePower < -SWIPE_THRESHOLD) {
-      handleNext();
-    } else if (swipePower > SWIPE_THRESHOLD) {
-      handlePrev();
+  function onKeyDown(e: KeyboardEvent<HTMLDivElement>) {
+    if (e.key === "ArrowRight") {
+      e.preventDefault();
+      next();
+    } else if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      prev();
     }
   }
 
   const current = items[index];
-  const Icon = icons[current.icon];
 
   return (
     <div
       role="region"
       aria-roledescription="carrossel"
-      aria-label="Comodidades exclusivas do clube privativo"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)}
-      onBlur={() => setPaused(false)}
-      onKeyDown={handleKeyDown}
+      aria-label="Experiências do Reserva Imperiale"
+      onKeyDown={onKeyDown}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onFocusCapture={() => setHovered(true)}
+      onBlurCapture={() => setHovered(false)}
+      className="grid items-center gap-14 lg:grid-cols-[1fr_1.1fr] lg:gap-20"
     >
-      <p className="sr-only" aria-live="polite">
-        {`${index + 1} de ${items.length}: ${current.title}`}
-      </p>
-
-      <div className="relative h-80 overflow-hidden rounded-2xl md:h-[32rem]">
-        <AnimatePresence custom={direction} mode="wait">
-          <motion.div
-            key={current.title}
-            custom={direction}
-            variants={variants}
-            initial="enter"
-            animate="center"
-            exit="exit"
-            transition={{ duration: reducedMotion ? 0 : 0.45, ease: "easeOut" }}
-            drag="x"
-            dragElastic={0.12}
-            dragConstraints={{ left: 0, right: 0 }}
-            onDragStart={() => setPaused(true)}
-            onDragEnd={handleDragEnd}
-            className="absolute inset-0"
-          >
-            <Image
-              src={current.image}
-              alt={current.alt}
-              fill
-              priority={index === 0}
-              sizes="(min-width: 768px) 80vw, 100vw"
-              className="object-cover"
-              draggable={false}
-            />
-            <div className="absolute inset-0 flex flex-col justify-end bg-gradient-to-t from-primary/90 via-primary/30 to-transparent p-8 md:p-12">
-              <Icon className="mb-3 size-9 text-secondary-fixed" aria-hidden="true" />
-              <h3 className="mb-2 font-heading text-headline-md text-surface md:text-headline-lg">
-                {current.title}
-              </h3>
-              <p className="max-w-md font-light text-body-md text-surface-variant">
-                {current.description}
+      {/* Texto + controles */}
+      <div className="order-2 lg:order-1">
+        <div aria-live={autoplay ? "off" : "polite"} aria-atomic="true" className="min-h-[11rem]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.title}
+              initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -16 }}
+              transition={{ duration: 0.6, ease: EASE }}
+            >
+              <p className="eyebrow text-champagne">
+                <span className="sr-only">Experiência </span>
+                {String(index + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
               </p>
-            </div>
-          </motion.div>
-        </AnimatePresence>
+              <h3 className="mt-5 font-display text-5xl font-light lg:text-6xl">{current.title}</h3>
+              <p className="mt-4 max-w-sm text-base leading-relaxed text-cream/80">{current.description}</p>
+            </motion.div>
+          </AnimatePresence>
+        </div>
 
-        <button
-          type="button"
-          onClick={handlePrev}
-          aria-label="Comodidade anterior"
-          className="absolute top-1/2 left-4 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/80 text-primary shadow-md backdrop-blur transition-all hover:scale-105 hover:bg-secondary-container hover:text-on-secondary-container focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring md:size-11"
-        >
-          <ChevronLeft className="size-5" aria-hidden="true" />
-        </button>
-        <button
-          type="button"
-          onClick={handleNext}
-          aria-label="Próxima comodidade"
-          className="absolute top-1/2 right-4 flex size-9 -translate-y-1/2 items-center justify-center rounded-full bg-surface/80 text-primary shadow-md backdrop-blur transition-all hover:scale-105 hover:bg-secondary-container hover:text-on-secondary-container focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring md:size-11"
-        >
-          <ChevronRight className="size-5" aria-hidden="true" />
-        </button>
+        <div className="mt-10 flex items-center gap-3">
+          <Button variant="pill-light" size="icon-pill" onClick={prev} aria-label="Experiência anterior">
+            <ArrowLeft aria-hidden="true" />
+          </Button>
+          <Button variant="pill-light" size="icon-pill" onClick={next} aria-label="Próxima experiência">
+            <ArrowRight aria-hidden="true" />
+          </Button>
+          {!reduceMotion && (
+            <Button
+              variant="pill-light"
+              size="icon-pill"
+              onClick={() => setPlaying((p) => !p)}
+              aria-label={playing ? "Pausar rotação automática" : "Retomar rotação automática"}
+            >
+              {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
+            </Button>
+          )}
+          {/* Barra de tempo do autoplay */}
+          <div aria-hidden="true" className="ml-4 h-px flex-1 overflow-hidden bg-cream/20">
+            {autoplay && (
+              <motion.div
+                key={index}
+                className="h-full origin-left bg-champagne"
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                transition={{ duration: AUTOPLAY_MS / 1000, ease: "linear" }}
+              />
+            )}
+          </div>
+        </div>
       </div>
 
-      <div className="mt-space-sm hidden grid-cols-4 gap-3 md:grid">
-        {items.map((item, i) => (
-          <button
-            key={item.title}
-            type="button"
-            onClick={() => goTo(i)}
-            aria-label={`Ver ${item.title}`}
-            aria-current={i === index}
-            className={`group relative h-20 overflow-hidden rounded-lg transition-all ${
-              i === index ? "ring-2 ring-secondary-fixed" : "opacity-70 hover:opacity-100"
-            }`}
-          >
-            <Image
-              src={item.image}
-              alt=""
-              fill
-              sizes="20vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <span className="absolute inset-x-0 bottom-0 bg-primary/70 px-2 py-1 text-label-sm uppercase tracking-wider text-surface">
-              {item.title}
-            </span>
-          </button>
-        ))}
-      </div>
-
-      <div className="mt-space-sm flex items-center justify-center gap-3 md:hidden">
-        {items.map((item, i) => (
-          <button
-            key={item.title}
-            type="button"
-            onClick={() => goTo(i)}
-            aria-label={`Ver ${item.title}`}
-            aria-current={i === index}
-            className={`size-2.5 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring ${
-              i === index ? "bg-secondary" : "bg-outline-variant"
-            }`}
-          />
-        ))}
+      {/* Pilha de cartas */}
+      <div className="relative order-1 mx-auto aspect-[4/5] w-full max-w-[26rem] lg:order-2 lg:max-w-[30rem]">
+        {items.map((item, i) => {
+          const depth = (i - index + n) % n;
+          const isTop = depth === 0;
+          return (
+            <motion.div
+              key={item.title}
+              role="group"
+              aria-roledescription="slide"
+              aria-label={`${i + 1} de ${n}: ${item.title}`}
+              aria-hidden={!isTop}
+              className="absolute inset-0 overflow-hidden rounded-[2rem] bg-ink-soft shadow-[0_30px_80px_-30px_rgba(0,0,0,0.8)]"
+              style={{ zIndex: n - depth, cursor: isTop ? "grab" : "default" }}
+              initial={false}
+              animate={{
+                y: depth * -26,
+                scale: 1 - depth * 0.07,
+                rotate: depth === 0 ? 0 : depth % 2 ? 3 : -3,
+                opacity: depth > 2 ? 0 : 1 - depth * 0.15,
+              }}
+              transition={{ duration: reduceMotion ? 0 : 0.8, ease: EASE }}
+              drag={isTop && !reduceMotion ? "x" : false}
+              dragSnapToOrigin
+              dragElastic={0.6}
+              whileDrag={{ cursor: "grabbing", rotate: 0 }}
+              onDragEnd={isTop ? onDragEnd : undefined}
+            >
+              <Image
+                src={item.image}
+                alt={isTop ? item.alt : ""}
+                fill
+                draggable={false}
+                sizes="(min-width: 1024px) 30rem, 90vw"
+                className="pointer-events-none object-cover select-none"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+              <span className="eyebrow absolute bottom-6 left-6 text-cream">{item.title}</span>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );

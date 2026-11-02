@@ -1,43 +1,66 @@
-import type { Metadata } from "next";
-import { Playfair_Display, Inter, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Cormorant_Garamond, Inter } from "next/font/google";
+import { ConsentProvider } from "@/hooks/use-consent";
+import { CookieConsent } from "@/components/cookie-consent";
+import { CustomCursor } from "@/components/custom-cursor";
 import "./globals.css";
 
-const headingFont = Playfair_Display({
-  variable: "--font-heading",
+const displayFont = Cormorant_Garamond({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
+  display: "swap",
 });
 
 const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: "Atelier Residences | Imóveis de Alto Padrão",
+  metadataBase: new URL("https://atelierresidences.com.br"),
+  title: {
+    default: "Atelier Residences | Reserva Imperiale",
+    template: "%s | Atelier Residences",
+  },
   description:
-    "A Atelier Residences é uma imobiliária especializada em empreendimentos de alto padrão. Conheça o Reserva Imperiale, nosso novo lançamento exclusivo.",
+    "Imobiliária de alto padrão em São Paulo. Conheça o Reserva Imperiale: coberturas, gardens e andares inteiros com arquitetura autoral e atendimento sob medida.",
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Atelier Residences",
+    title: "Atelier Residences | Reserva Imperiale",
+    description: "Arquitetura autoral e atendimento sob medida. Agende sua visita privativa.",
+  },
+  robots: { index: true, follow: true },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#fcf9f3",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
-      className={`${headingFont.variable} ${bodyFont.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-surface text-on-surface">
+      <body className="flex min-h-full flex-col bg-cream text-ink">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:rounded focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+          className="sr-only rounded-full bg-ink px-5 py-3 text-sm text-cream focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]"
         >
           Pular para o conteúdo
         </a>
-        {children}
+        <ConsentProvider>
+          {children}
+          <CookieConsent />
+        </ConsentProvider>
+        <CustomCursor />
       </body>
     </html>
   );
