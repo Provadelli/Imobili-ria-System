@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, useReducedMotion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 import { Eyebrow, MaskText } from "@/components/reveal";
 import { locationPoints, site } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -16,7 +16,7 @@ export function Location() {
   const duration = reduceMotion ? 0 : 0.4;
 
   return (
-    <section id="localizacao" aria-labelledby="localizacao-title" className="bg-cream py-28 lg:py-40">
+    <section id="localizacao" aria-labelledby="localizacao-title" className="defer-render bg-cream py-28 lg:py-40">
       <div className="mx-auto grid max-w-[90rem] grid-cols-1 items-center gap-16 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
         <div className="lg:col-span-5">
           <Eyebrow index="08">Localização</Eyebrow>
@@ -71,7 +71,7 @@ export function Location() {
               <ellipse cx="22" cy="30" rx="12" ry="8" fill="#c9ad84" fillOpacity="0.08" />
 
               {locationPoints.map((p) => (
-                <motion.line
+                <m.line
                   key={p.id}
                   x1="50"
                   y1="46"
@@ -88,7 +88,7 @@ export function Location() {
 
               {locationPoints.map((p) => (
                 <g key={p.id}>
-                  <motion.circle
+                  <m.circle
                     cx={p.x}
                     cy={p.y}
                     fill="#c9ad84"

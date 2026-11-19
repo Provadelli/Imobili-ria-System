@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { m, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { heroImage } from "@/lib/content";
@@ -23,7 +23,7 @@ export function Hero() {
       aria-labelledby="hero-title"
       className="on-dark relative isolate flex h-[100svh] min-h-[620px] w-full items-end overflow-hidden bg-ink text-cream"
     >
-      <motion.div className="absolute inset-0 -z-10" style={{ y: imageY }}>
+      <m.div className="absolute inset-0 -z-10" style={{ y: imageY }}>
         <div className="relative h-full w-full motion-safe:animate-ken-burns">
           <Image
             src={heroImage.src}
@@ -37,9 +37,9 @@ export function Hero() {
         {/* Gradientes garantem contraste do texto (WCAG 1.4.3) */}
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/45 to-ink/30" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/60 via-transparent to-transparent" />
-      </motion.div>
+      </m.div>
 
-      <motion.div
+      <m.div
         style={{ y: contentY, opacity: contentOpacity }}
         className="mx-auto w-full max-w-[90rem] px-5 pb-14 sm:px-8 lg:px-12 lg:pb-20"
       >
@@ -85,7 +85,7 @@ export function Hero() {
             </Link>
           </div>
         </div>
-      </motion.div>
+      </m.div>
     </section>
   );
 }

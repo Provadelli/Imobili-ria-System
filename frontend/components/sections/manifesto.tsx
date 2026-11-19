@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
+import { m, useScroll, useTransform, type MotionValue } from "motion/react";
 import { Counter } from "@/components/counter";
 import { Eyebrow, Reveal } from "@/components/reveal";
 import { highlights, manifesto } from "@/lib/content";
@@ -19,7 +19,7 @@ function Word({
   const color = useTransform(progress, range, ["#968980", "#150d0a"]);
   return (
     <span className="relative mr-[0.25em] inline-block">
-      <motion.span style={{ color }}>{children}</motion.span>
+      <m.span style={{ color }}>{children}</m.span>
     </span>
   );
 }

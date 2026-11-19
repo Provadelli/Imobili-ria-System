@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
+import { m, useReducedMotion, useScroll, useSpring, useTransform } from "motion/react";
 import { Eyebrow } from "@/components/reveal";
 import { differentials, gallery } from "@/lib/content";
 import { useMediaQuery } from "@/hooks/use-media-query";
@@ -86,7 +86,7 @@ function PinnedTrack() {
       style={{ height: `calc(100vh + ${distance}px)` }}
     >
       <div className="sticky top-0 flex h-screen flex-col justify-center overflow-hidden">
-        <motion.div ref={trackRef} style={{ x }} className="flex h-[72vh] items-stretch gap-10 px-12 will-change-transform">
+        <m.div ref={trackRef} style={{ x }} className="flex h-[72vh] items-stretch gap-10 px-12 will-change-transform">
           <Intro />
           {gallery.map((item, i) => (
             <Frame
@@ -97,9 +97,9 @@ function PinnedTrack() {
             />
           ))}
           <div aria-hidden="true" className="w-12 shrink-0" />
-        </motion.div>
+        </m.div>
         <div aria-hidden="true" className="mx-12 mt-10 h-px bg-line">
-          <motion.div className="h-full origin-left bg-ink" style={{ scaleX: bar }} />
+          <m.div className="h-full origin-left bg-ink" style={{ scaleX: bar }} />
         </div>
       </div>
     </section>

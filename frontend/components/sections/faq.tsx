@@ -9,7 +9,7 @@ import { faqs } from "@/lib/content";
 
 export function Faq() {
   return (
-    <section id="faq" aria-labelledby="faq-title" className="bg-cream py-28 lg:py-40">
+    <section id="faq" aria-labelledby="faq-title" className="defer-render bg-cream py-28 lg:py-40">
       <div className="mx-auto grid max-w-[90rem] gap-14 px-5 sm:px-8 lg:grid-cols-12 lg:px-12">
         <div className="lg:col-span-4">
           <Eyebrow index="09">Dúvidas</Eyebrow>

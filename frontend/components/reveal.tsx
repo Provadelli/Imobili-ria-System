@@ -1,7 +1,7 @@
 "use client";
 
 import type { ElementType, ReactNode } from "react";
-import { motion, useReducedMotion, type Variants } from "motion/react";
+import { m, useReducedMotion, type Variants } from "motion/react";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -26,7 +26,7 @@ export function Reveal({
   const reduceMotion = useReducedMotion();
 
   return (
-    <motion.div
+    <m.div
       initial={reduceMotion ? false : "hidden"}
       whileInView="visible"
       viewport={{ once: true, margin: "-80px" }}
@@ -35,7 +35,7 @@ export function Reveal({
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -64,7 +64,7 @@ export function MaskText({
     <Tag id={id} className={className}>
       {lines.map((line, i) => (
         <span key={i} className="block overflow-hidden pb-[0.08em]">
-          <motion.span
+          <m.span
             className={cn("block", lineClassName)}
             initial={reduceMotion ? false : { y: "110%" }}
             whileInView={{ y: "0%" }}
@@ -72,7 +72,7 @@ export function MaskText({
             transition={{ duration: 1.1, delay: delay + i * 0.09, ease: EASE }}
           >
             {line}
-          </motion.span>
+          </m.span>
         </span>
       ))}
     </Tag>

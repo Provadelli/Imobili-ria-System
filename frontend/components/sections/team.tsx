@@ -4,7 +4,7 @@ import { team } from "@/lib/content";
 
 export function Team() {
   return (
-    <section id="consultores" aria-labelledby="consultores-title" className="bg-cream py-28 lg:py-40">
+    <section id="consultores" aria-labelledby="consultores-title" className="defer-render bg-cream py-28 lg:py-40">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div>
