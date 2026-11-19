@@ -2,7 +2,7 @@
 
 # Atelier Residences
 
-**Landing page de lançamento imobiliário de alto padrão: o empreendimento Reserva Imperiale, na Avenida Paulista, em São Paulo.** Apresenta as residências, as comodidades e leva o visitante direto ao WhatsApp de um consultor.
+**Site institucional de uma imobiliária de alto padrão, com o empreendimento fictício Reserva Imperiale como vitrine.** Reúne imóveis, planta isométrica em 3D, comodidades, localização e contato direto por WhatsApp.
 
 ![Next.js](https://img.shields.io/badge/Next.js-16.3-000000?style=flat-square&logo=nextdotjs&logoColor=white)
 ![React](https://img.shields.io/badge/React-19-61DAFB?style=flat-square&logo=react&logoColor=black)
@@ -10,27 +10,25 @@
 ![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?style=flat-square&logo=typescript&logoColor=white)
 ![Deploy](https://img.shields.io/badge/deploy-Vercel-000000?style=flat-square&logo=vercel&logoColor=white)
 
-[Estrutura](#estrutura) · [Como executar](#como-executar) · [Conteúdo](#editando-o-conteúdo) · [SEO e performance](#seo-e-performance) · [Roadmap](#roadmap-e-limitações)
+[Destaques](#destaques) · [Estrutura](#estrutura) · [Como executar](#como-executar) · [Editar o conteúdo](#editar-o-conteúdo) · [Roadmap](#roadmap-e-limitações)
 
 </div>
 
 ---
 
-> Telefone, WhatsApp, e-mail, endereço e CRECI do site são **dados de exemplo**. Depoimentos e números institucionais também são ilustrativos. Troque tudo em `frontend/lib/content.ts` antes de publicar.
-
-## Sobre o projeto
-
-Página única em **Next.js (App Router)** com renderização estática, escrita em TypeScript e estilizada com Tailwind 4 e componentes shadcn/ui. A identidade visual (paleta, tipografia Playfair Display + Inter) segue o design system em `docs/assets/Design/`.
+> O Reserva Imperiale é um projeto fictício, criado para demonstração. CNPJ, CRECI, telefones, e-mail e endereço são dados de exemplo e as imagens são de banco de imagens. Troque tudo em `frontend/lib/content.ts` antes de usar em produção.
 
 ## Destaques
 
 | Recurso | O que faz |
 |---|---|
-| Hero otimizado | Imagem com `next/image` e `priority`, palavra rotativa que respeita `prefers-reduced-motion` e não confunde leitores de tela. |
-| Formulário via WhatsApp | Valida os campos e abre `wa.me` com a mensagem pronta. Não há backend nem coleta de dados no servidor. |
-| Animações acessíveis | `motion` com versão reduzida para quem desativa animações; carrosséis com teclado e pausa ao focar. |
-| SEO técnico | Metadata completa, Open Graph, `robots.txt`, `sitemap.xml`, JSON-LD (`RealEstateAgent` e `FAQPage`). |
-| Cabeçalhos de segurança | `nosniff`, `Referrer-Policy`, `X-Frame-Options` e `Permissions-Policy` em `next.config.ts`. |
+| Carrossel de imóveis | Hero com fachada e as três tipologias, autoplay que pausa ao passar o mouse ou focar e respeita `prefers-reduced-motion`. |
+| Catálogo por abas | Cobertura, Garden e Sky com área, suítes, vagas e diferenciais. |
+| Planta em 3D | Isométrica em SVG puro, calculada no cliente: gire arrastando, separe os ambientes em camadas e veja a área de cada cômodo. Sem biblioteca 3D. |
+| Comodidades | Carrossel com teclado, gesto de arrastar e pausa ao focar. |
+| Contato por WhatsApp | O formulário valida os campos e abre `wa.me` com a mensagem pronta. Não há backend nem coleta no servidor. |
+| Privacidade | Banner de cookies com preferências e política de privacidade. O mapa é um SVG próprio, sem iframe de terceiros. |
+| SEO | Metadata, Open Graph, `robots.txt`, `sitemap.xml` e JSON-LD (`RealEstateAgent` e `FAQPage`). |
 
 ## Stack
 
@@ -38,9 +36,9 @@ Página única em **Next.js (App Router)** com renderização estática, escrita
 |---|---|
 | Framework | Next.js 16.3 (Turbopack), React 19 |
 | Linguagem | TypeScript 5 |
-| Estilo | Tailwind CSS 4, shadcn/ui (Radix) |
-| Animação | `motion` |
-| Ícones | `lucide-react` |
+| Estilo | Tailwind CSS 4, componentes Radix |
+| Animação | `motion` com `LazyMotion` |
+| Tipografia | Manrope e Inter (`next/font`) |
 | Imagens | `next/image` (AVIF/WebP), fotos do Unsplash |
 | Hospedagem | Vercel |
 
@@ -49,14 +47,16 @@ Página única em **Next.js (App Router)** com renderização estática, escrita
 ```text
 .
 ├── frontend/
-│   ├── app/              # layout, página, robots, sitemap, ícone
+│   ├── app/                 # layout, página, privacidade, robots, sitemap
 │   ├── components/
-│   │   ├── sections/     # hero, residências, comodidades, contato...
-│   │   └── ui/           # componentes shadcn
+│   │   ├── sections/        # hero, imóveis, planta 3D, comodidades, contato...
+│   │   ├── floor-plan-3d.tsx  # planta isométrica em SVG
+│   │   └── ui/              # componentes base
 │   └── lib/
-│       ├── content.ts    # todo o texto e dados do site
-│       └── site-url.ts   # URL base para SEO
-└── docs/                 # briefing e assets de design de referência
+│       ├── content.ts       # textos e dados do site
+│       ├── floor-plans.ts   # ambientes de cada planta
+│       └── site-url.ts      # URL base para SEO
+└── docs/                    # briefing e referências de design
 ```
 
 ## Como executar
@@ -79,30 +79,28 @@ npm run dev          # http://localhost:3000
 
 | Variável | Onde vai | Observação |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | `.env.local` / Vercel | Opcional. URL pública usada em canonical, Open Graph e sitemap. Na Vercel, usa `VERCEL_PROJECT_PRODUCTION_URL` se ausente. |
+| `NEXT_PUBLIC_SITE_URL` | `.env.local` / Vercel | Opcional. URL pública usada em canonical, Open Graph e sitemap. Na Vercel usa `VERCEL_PROJECT_PRODUCTION_URL` se ausente. |
 
 Arquivos `.env*` não vão para o git.
 
-## Editando o conteúdo
+## Editar o conteúdo
 
-Textos, contatos, residências, comodidades, FAQ e depoimentos ficam em `frontend/lib/content.ts`. O número do WhatsApp (`whatsappDigits`, só dígitos com DDI) alimenta o formulário e os links.
-
-## SEO e performance
-
-O build estático gera `/`, `/robots.txt`, `/sitemap.xml` e `/icon.svg`. O `npm run lint` e o `npm run build` passam sem erros (execução de 18/11/2026). Medições de Lighthouse no deploy: **pendente**.
+- Textos, contatos, imóveis, comodidades e FAQ: `frontend/lib/content.ts`.
+- Ambientes da planta 3D (posição, tamanho e descrição): `frontend/lib/floor-plans.ts`. A unidade é a célula; as áreas por cômodo são proporcionais ao total de cada tipologia.
+- Número do WhatsApp: `whatsappDigits` / `whatsappLink` em `content.ts`.
 
 ## Roadmap e limitações
 
-- ✅ Hero com `next/image`, formulário via WhatsApp, SEO técnico, correções de contraste e acessibilidade.
-- Limitação: as fotos são de banco de imagens e não representam o empreendimento real.
-- Limitação: não há imagem Open Graph dedicada.
+- ✅ Redesign institucional, carrossel, planta 3D, SEO técnico e CI (lint e build).
+- Limitação: a planta 3D é esquemática, serve para entender a distribuição e não para medir o projeto.
+- Limitação: as fotos não representam um empreendimento real.
+- Lighthouse medido localmente em mobile oscila entre 90 e 99 em Performance; Acessibilidade, Boas práticas e SEO ficam em 100. Medição no deploy: **pendente**.
 
 Próximos passos:
 
-1. Substituir dados de exemplo por contatos, CRECI e perfis sociais reais.
-2. Trocar as fotos por renders e fotografias do empreendimento.
-3. Medir Lighthouse no deploy e registrar aqui.
-4. Adicionar workflow de CI (lint e build).
+1. Trocar dados e imagens de exemplo por reais.
+2. Medir Lighthouse no deploy e registrar aqui.
+3. Adicionar imagem Open Graph dedicada.
 
 ## Autor
 

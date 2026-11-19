@@ -14,18 +14,14 @@ import { cn } from "@/lib/utils";
  * - Após o hero: fundo creme translúcido, texto escuro.
  * - Esconde ao rolar para baixo e reaparece ao rolar para cima.
  */
-export function SiteHeader({ overHero = true }: { overHero?: boolean }) {
+export function SiteHeader({ overHero = false }: { overHero?: boolean }) {
   const { scrollY } = useScroll();
   const reduceMotion = useReducedMotion();
   const [solid, setSolid] = useState(!overHero);
-  const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (y) => {
-    const prev = scrollY.getPrevious() ?? 0;
     setSolid(!overHero || y > window.innerHeight * 0.85);
-    setHidden(!menuOpen && y > 400 && y > prev + 4);
-    if (y < prev - 4) setHidden(false);
   });
 
   const light = !solid;
@@ -33,7 +29,7 @@ export function SiteHeader({ overHero = true }: { overHero?: boolean }) {
   return (
     <m.header
       initial={false}
-      animate={{ y: hidden && !reduceMotion ? "-100%" : "0%" }}
+      animate={{ y: "0%" }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-500",

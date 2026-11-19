@@ -21,15 +21,15 @@ export function Team() {
 
         <ol className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-line bg-line lg:mt-24 lg:grid-cols-3">
           {services.map((service, i) => (
-            <Reveal key={service.title} delay={i * 0.08} className="bg-cream p-8 lg:p-10">
-              <li className="list-none">
+            <li key={service.title} className="list-none bg-cream">
+              <Reveal delay={i * 0.08} className="h-full p-8 lg:p-10">
                 <span className="font-display text-5xl font-light text-bronze" aria-hidden="true">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-8 font-display text-2xl font-light">{service.title}</h3>
                 <p className="mt-4 text-base leading-relaxed text-stone">{service.description}</p>
-              </li>
-            </Reveal>
+              </Reveal>
+            </li>
           ))}
         </ol>
       </div>

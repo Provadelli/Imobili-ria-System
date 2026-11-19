@@ -24,9 +24,10 @@ export const site = {
 };
 
 export const navLinks = [
-  { label: "Empreendimento", href: "#manifesto" },
-  { label: "O projeto", href: "#mercado" },
-  { label: "Residências", href: "#residencias" },
+  { label: "Imóveis", href: "#imoveis" },
+  { label: "Planta 3D", href: "#planta" },
+  { label: "Comodidades", href: "#experiencias" },
+  { label: "Localização", href: "#localizacao" },
   { label: "Atendimento", href: "#atendimento" },
   { label: "Contato", href: "#contato" },
 ];
@@ -99,33 +100,45 @@ export const marketSource = "Medidas do projeto arquitetônico. Reserva Imperial
 
 export const residences = [
   {
+    id: "cobertura",
     tag: "Cobertura",
     name: "Penthouse Duplex",
-    area: "680 m²",
+    area: 680,
+    suites: 5,
+    parking: 5,
+    summary: "Duplex no topo da torre, com terraço e piscina privativa.",
     description:
       "O topo do Reserva Imperiale: pé-direito duplo, terraço panorâmico e piscina privativa com borda infinita.",
-    features: ["5 suítes com closet", "5 vagas", "Piscina privativa"],
-    image: unsplash("photo-1600607687920-4e2a09cf159d"),
+    features: ["Piscina privativa", "Living em pé-direito duplo", "Cozinha gourmet com ilha"],
+    image: unsplash("photo-1600607687920-4e2a09cf159d", 1600),
     alt: "Interior de cobertura duplex com escada escultural e vista panorâmica da cidade.",
   },
   {
+    id: "garden",
     tag: "Garden",
     name: "Garden Suites",
-    area: "580 m²",
+    area: 580,
+    suites: 4,
+    parking: 4,
+    summary: "Casa suspensa, com jardim privativo e living integrado.",
     description:
       "A sensação de uma casa suspensa, com terraço privativo arborizado e living integrado ao jardim.",
-    features: ["4 suítes master", "4 vagas", "Jardim privativo"],
-    image: unsplash("photo-1600210492486-724fe5c67fb0"),
+    features: ["Jardim privativo com deck", "Living aberto para o jardim", "Quatro suítes"],
+    image: unsplash("photo-1600210492486-724fe5c67fb0", 1600),
     alt: "Apartamento garden com terraço ajardinado e área de estar externa.",
   },
   {
+    id: "sky",
     tag: "Andar inteiro",
     name: "Sky Residences",
-    area: "520 m²",
+    area: 520,
+    suites: 4,
+    parking: 4,
+    summary: "Um pavimento por residência, com elevador privativo.",
     description:
       "Um pavimento inteiro por residência, com elevador privativo e automação completa.",
-    features: ["4 suítes", "4 vagas", "Elevador privativo"],
-    image: unsplash("photo-1512917774080-9991f1c4c750"),
+    features: ["Elevador privativo", "Janelas do piso ao teto", "Automação completa"],
+    image: unsplash("photo-1512917774080-9991f1c4c750", 1600),
     alt: "Sala de estar com janelas curvas do piso ao teto e vista panorâmica.",
   },
 ];

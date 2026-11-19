@@ -49,17 +49,17 @@
   --color-line: var(--line);
 
   /* Escala tipográfica fluida */
-  --text-display: clamp(3rem, 1.6rem + 6.4vw, 8.5rem);
-  --text-display--line-height: 0.95;
+  --text-display: clamp(2.25rem, 1.5rem + 3.2vw, 4.25rem);
+  --text-display--line-height: 1.05;
   --text-display--letter-spacing: -0.02em;
-  --text-title: clamp(2.25rem, 1.5rem + 3.2vw, 4.75rem);
-  --text-title--line-height: 1.02;
+  --text-title: clamp(1.875rem, 1.45rem + 1.7vw, 3rem);
+  --text-title--line-height: 1.1;
   --text-title--letter-spacing: -0.015em;
   --text-subtitle: clamp(1.5rem, 1.2rem + 1.2vw, 2.25rem);
   --text-subtitle--line-height: 1.15;
   --text-eyebrow: 0.75rem;
   --text-eyebrow--line-height: 1rem;
-  --text-eyebrow--letter-spacing: 0.3em;
+  --text-eyebrow--letter-spacing: 0.16em;
 
   --ease-lux: cubic-bezier(0.22, 1, 0.36, 1);
 
@@ -184,6 +184,47 @@
       scroll-behavior: auto !important;
     }
   }
+}
+
+@keyframes plan-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes plan-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.plan-float {
+  animation: plan-float 6s ease-in-out infinite;
+}
+
+.plan-stage {
+  background-image:
+    radial-gradient(circle at 50% 55%, rgba(60, 80, 140, 0.35), transparent 60%),
+    linear-gradient(rgba(233, 207, 160, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(233, 207, 160, 0.05) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+}
+
+.font-display em {
+  font-style: normal;
+  color: var(--bronze);
+}
+
+.on-dark .font-display em,
+.font-display.on-dark em {
+  color: var(--champagne);
 }
 
 @layer components {
