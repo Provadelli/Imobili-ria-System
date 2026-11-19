@@ -4,17 +4,17 @@ import { AmenitiesCarousel } from "@/components/sections/amenities-carousel";
 
 export function Amenities() {
   return (
-    <section aria-labelledby="amenidades-heading" className="mx-auto max-w-7xl px-6 py-space-xl lg:px-12">
+    <section id="comodidades" aria-labelledby="amenidades-heading" className="mx-auto max-w-7xl px-6 py-space-xl lg:px-12">
       <Reveal className="mx-auto mb-space-lg max-w-2xl text-center">
-        <span className="mb-space-xs block text-label-md uppercase tracking-[0.2em] text-secondary">
-          Comodidades Exclusivas
+        <span className="mb-space-xs block text-label-md uppercase tracking-[0.2em] text-secondary-foreground">
+          Comodidades
         </span>
         <h2 id="amenidades-heading" className="mb-4 font-heading text-headline-lg text-primary">
-          Um clube privativo à sua disposição
+          Áreas comuns pensadas para o dia a dia
         </h2>
         <p className="text-body-md text-on-surface-variant">
-          Amenidades de nível internacional integradas ao seu dia a dia para
-          proporcionar bem-estar sem sair de casa.
+          Adega, spa, academia e heliponto dentro do condomínio, para usar sem
+          precisar sair de casa.
         </p>
       </Reveal>
 

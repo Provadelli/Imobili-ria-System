@@ -1,34 +1,59 @@
-import type { Metadata } from "next";
-import { Playfair_Display, Inter, Geist_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import { Playfair_Display, Inter } from "next/font/google";
+import { siteUrl } from "@/lib/site-url";
+import { JsonLd } from "@/components/json-ld";
 import "./globals.css";
 
 const headingFont = Playfair_Display({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "600"],
+  display: "swap",
 });
 
 const bodyFont = Inter({
   variable: "--font-body",
   subsets: ["latin"],
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const description =
+  "Reserva Imperiale: residências de 520 a 680m² na Avenida Paulista, São Paulo. Conheça plantas, comodidades e agende uma visita com a Atelier Residences.";
 
 export const metadata: Metadata = {
-  title: "Atelier Residences | Imóveis de Alto Padrão",
-  description:
-    "A Atelier Residences é uma imobiliária especializada em empreendimentos de alto padrão. Conheça o Reserva Imperiale, nosso novo lançamento exclusivo.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Reserva Imperiale | Atelier Residences — Imóveis de alto padrão em São Paulo",
+    template: "%s | Atelier Residences",
+  },
+  description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Atelier Residences",
+    title: "Reserva Imperiale | Atelier Residences",
+    description,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Reserva Imperiale | Atelier Residences",
+    description,
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#fcf9f3",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
-      className={`${headingFont.variable} ${bodyFont.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${headingFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-surface text-on-surface">
         <a
@@ -38,6 +63,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           Pular para o conteúdo
         </a>
         {children}
+        <JsonLd />
       </body>
     </html>
   );

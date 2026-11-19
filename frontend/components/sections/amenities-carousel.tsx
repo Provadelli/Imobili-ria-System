@@ -78,7 +78,7 @@ export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
     <div
       role="region"
       aria-roledescription="carrossel"
-      aria-label="Comodidades exclusivas do clube privativo"
+      aria-label="Comodidades do condomínio"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -110,7 +110,6 @@ export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
               src={current.image}
               alt={current.alt}
               fill
-              priority={index === 0}
               sizes="(min-width: 768px) 80vw, 100vw"
               className="object-cover"
               draggable={false}
@@ -152,7 +151,7 @@ export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
             type="button"
             onClick={() => goTo(i)}
             aria-label={`Ver ${item.title}`}
-            aria-current={i === index}
+            aria-current={i === index ? "true" : undefined}
             className={`group relative h-20 overflow-hidden rounded-lg transition-all ${
               i === index ? "ring-2 ring-secondary-fixed" : "opacity-70 hover:opacity-100"
             }`}
@@ -178,9 +177,9 @@ export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
             type="button"
             onClick={() => goTo(i)}
             aria-label={`Ver ${item.title}`}
-            aria-current={i === index}
-            className={`size-2.5 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring ${
-              i === index ? "bg-secondary" : "bg-outline-variant"
+            aria-current={i === index ? "true" : undefined}
+            className={`size-3 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring ${
+              i === index ? "bg-secondary-foreground" : "bg-outline-variant"
             }`}
           />
         ))}

@@ -13,7 +13,7 @@ export function Residences() {
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <Reveal className="mb-space-lg flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
-            <span className="mb-space-xs block text-label-md uppercase tracking-[0.2em] text-secondary">
+            <span className="mb-space-xs block text-label-md uppercase tracking-[0.2em] text-secondary-foreground">
               Portfólio de Residências
             </span>
             <h2 id="residencias-heading" className="font-heading text-headline-lg text-primary">
@@ -53,7 +53,7 @@ export function Residences() {
                     <ul className="mb-8 space-y-2 text-body-sm text-on-surface">
                       {unit.features.map((feature) => (
                         <li key={feature} className="flex items-center gap-2">
-                          <Check className="size-4 text-secondary" aria-hidden="true" />
+                          <Check className="size-4 text-secondary-foreground" aria-hidden="true" />
                           {feature}
                         </li>
                       ))}

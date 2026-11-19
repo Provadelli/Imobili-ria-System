@@ -12,7 +12,7 @@ export function Faq() {
     <section id="faq" aria-labelledby="faq-heading" className="bg-surface py-space-xl">
       <div className="mx-auto max-w-3xl px-6 lg:px-12">
         <Reveal className="mb-space-lg text-center">
-          <span className="mb-space-xs block text-label-md uppercase tracking-[0.2em] text-secondary">
+          <span className="mb-space-xs block text-label-md uppercase tracking-[0.2em] text-secondary-foreground">
             Perguntas Frequentes
           </span>
           <h2 id="faq-heading" className="font-heading text-headline-lg text-primary">
