@@ -63,17 +63,21 @@ export function MaskText({
   return (
     <Tag id={id} className={className}>
       {lines.map((line, i) => (
-        <span key={i} className="block overflow-hidden pb-[0.08em]">
+        <m.span
+          key={i}
+          className="block overflow-hidden pb-[0.08em]"
+          initial={reduceMotion ? false : "hidden"}
+          whileInView="visible"
+          viewport={{ once: true, margin: "-60px" }}
+        >
           <m.span
             className={cn("block", lineClassName)}
-            initial={reduceMotion ? false : { y: "110%" }}
-            whileInView={{ y: "0%" }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 1.1, delay: delay + i * 0.09, ease: EASE }}
+            variants={{ hidden: { y: "110%" }, visible: { y: "0%" } }}
+            transition={{ duration: 0.9, delay: delay + i * 0.09, ease: EASE }}
           >
             {line}
           </m.span>
-        </span>
+        </m.span>
       ))}
     </Tag>
   );
@@ -81,7 +85,6 @@ export function MaskText({
 
 /** Rótulo de seção no formato "01 — Título". */
 export function Eyebrow({
-  index,
   children,
   className,
 }: {
@@ -91,8 +94,7 @@ export function Eyebrow({
 }) {
   return (
     <p className={cn("eyebrow flex items-center gap-4 text-bronze", className)}>
-      {index && <span>{index}</span>}
-      {index && <span aria-hidden="true" className="h-px w-10 bg-current opacity-50" />}
+      <span aria-hidden="true" className="size-1.5 rounded-full bg-current" />
       <span>{children}</span>
     </p>
   );

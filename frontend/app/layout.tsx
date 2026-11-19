@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Manrope, Inter } from "next/font/google";
 import { ConsentProvider } from "@/hooks/use-consent";
 import { CookieConsent } from "@/components/cookie-consent";
 import { MotionProvider } from "@/components/motion-provider";
@@ -7,11 +7,10 @@ import { JsonLd } from "@/components/json-ld";
 import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
-const displayFont = Cormorant_Garamond({
+const displayFont = Manrope({
   variable: "--font-display",
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
+  weight: ["500", "600", "700"],
   display: "swap",
 });
 

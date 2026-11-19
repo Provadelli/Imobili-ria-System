@@ -9,7 +9,9 @@ export const site = {
   whatsapp: "+55 11 99999-0000",
   whatsappLink: "https://wa.me/5511999990000",
   email: "concierge@atelierresidences.com.br",
-  address: "Av. Principal, nº 1000 — Bairro Nobre, São Paulo — SP",
+  address: "Rua Imperiale, 1000 — Jardins, São Paulo — SP",
+  street: "Rua Imperiale, 1000",
+  neighborhood: "Jardins",
   creci: "CRECI 00000-J",
   cnpj: "00.000.000/0001-00",
   legalName: "Atelier Residences Negócios Imobiliários Ltda.",
@@ -22,10 +24,11 @@ export const site = {
 };
 
 export const navLinks = [
-  { label: "Empreendimento", href: "#manifesto" },
-  { label: "Mercado", href: "#mercado" },
-  { label: "Residências", href: "#residencias" },
-  { label: "Consultores", href: "#consultores" },
+  { label: "Imóveis", href: "#imoveis" },
+  { label: "Planta 3D", href: "#planta" },
+  { label: "Comodidades", href: "#experiencias" },
+  { label: "Localização", href: "#localizacao" },
+  { label: "Atendimento", href: "#atendimento" },
   { label: "Contato", href: "#contato" },
 ];
 
@@ -39,7 +42,7 @@ export const manifesto =
 
 export const highlights = [
   { value: 4, suffix: "", label: "Suítes master com closet" },
-  { value: 580, suffix: "m²", label: "De área privativa" },
+  { value: 520, suffix: "m²+", label: "De área privativa" },
   { value: 4, suffix: "", label: "Vagas com carregador EV" },
   { value: 360, suffix: "º", label: "De vista panorâmica" },
 ];
@@ -56,74 +59,86 @@ export type MarketSeries = {
   values: number[];
 };
 
-export const marketYears = [2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026];
+export const marketYears = ["1º", "6º", "12º", "18º", "24º", "30º", "36º", "40º"];
 
 export const marketSeries: MarketSeries[] = [
   {
     id: "valorizacao",
     num: "01",
-    title: ["Valorização", "do m²"],
+    title: ["Altura", "da torre"],
     description:
-      "O preço médio do metro quadrado de alto padrão na região cresceu 74% desde 2019.",
-    unit: "R$ mil / m²",
-    format: (v) => `R$ ${v.toLocaleString("pt-BR", { minimumFractionDigits: 1 })} mil`,
-    values: [13.8, 14.6, 15.9, 17.2, 18.8, 20.4, 22.1, 24.0],
+      "Do térreo à cobertura, a torre chega a 144 m em 40 pavimentos, com pé-direito de 3,6 m nos andares tipo.",
+    unit: "metros",
+    format: (v) => `${v} m`,
+    values: [4, 22, 43, 65, 86, 108, 130, 144],
   },
   {
     id: "vendas",
     num: "02",
-    title: ["Unidades", "vendidas"],
+    title: ["Residências", "acumuladas"],
     description:
-      "Unidades comercializadas pela Atelier por ano — mais de três vezes o volume de 2019.",
-    unit: "unidades / ano",
-    format: (v) => `${v} unid.`,
-    values: [38, 46, 61, 72, 84, 97, 118, 136],
+      "São 48 residências no total, com no máximo duas por andar, o que mantém a privacidade de cada uma.",
+    unit: "residências",
+    format: (v) => `${v} resid.`,
+    values: [2, 8, 14, 20, 26, 32, 40, 48],
   },
   {
     id: "altura",
     num: "03",
-    title: ["Altura", "das torres"],
+    title: ["Altitude", "da vista"],
     description:
-      "Altura dos empreendimentos entregues a cada ano, culminando nos 162 m do Reserva Imperiale.",
-    unit: "metros",
+      "O terreno fica a cerca de 800 m acima do nível do mar. Somada à altura da torre, a cobertura chega perto de 950 m.",
+    unit: "metros acima do mar",
     format: (v) => `${v} m`,
-    values: [72, 80, 88, 96, 108, 120, 138, 162],
+    values: [804, 822, 843, 865, 886, 908, 930, 944],
   },
 ];
 
-export const marketSource = "Dados ilustrativos para demonstração. Fonte simulada: Atelier Research, 2026.";
+export const marketSource = "Medidas do projeto arquitetônico. Reserva Imperiale é um empreendimento fictício, criado para demonstração.";
 
 /* ---------- Residências ---------- */
 
 export const residences = [
   {
+    id: "cobertura",
     tag: "Cobertura",
     name: "Penthouse Duplex",
-    area: "680 m²",
+    area: 680,
+    suites: 5,
+    parking: 5,
+    summary: "Duplex no topo da torre, com terraço e piscina privativa.",
     description:
       "O topo do Reserva Imperiale: pé-direito duplo, terraço panorâmico e piscina privativa com borda infinita.",
-    features: ["5 suítes com closet", "5 vagas", "Piscina privativa"],
-    image: unsplash("photo-1600607687920-4e2a09cf159d"),
+    features: ["Piscina privativa", "Living em pé-direito duplo", "Cozinha gourmet com ilha"],
+    image: unsplash("photo-1600607687920-4e2a09cf159d", 1600),
     alt: "Interior de cobertura duplex com escada escultural e vista panorâmica da cidade.",
   },
   {
+    id: "garden",
     tag: "Garden",
     name: "Garden Suites",
-    area: "580 m²",
+    area: 580,
+    suites: 4,
+    parking: 4,
+    summary: "Casa suspensa, com jardim privativo e living integrado.",
     description:
       "A sensação de uma casa suspensa, com terraço privativo arborizado e living integrado ao jardim.",
-    features: ["4 suítes master", "4 vagas", "Jardim privativo"],
-    image: unsplash("photo-1600210492486-724fe5c67fb0"),
+    features: ["Jardim privativo com deck", "Living aberto para o jardim", "Quatro suítes"],
+    image: unsplash("photo-1600210492486-724fe5c67fb0", 1600),
     alt: "Apartamento garden com terraço ajardinado e área de estar externa.",
   },
   {
+    id: "sky",
     tag: "Andar inteiro",
     name: "Sky Residences",
-    area: "520 m²",
+    area: 520,
+    suites: 4,
+    parking: 4,
+    summary: "Um pavimento por residência, com elevador privativo.",
     description:
       "Um pavimento inteiro por residência, com elevador privativo e automação completa.",
-    features: ["4 suítes", "4 vagas", "Elevador privativo"],
-    image: unsplash("photo-1512917774080-9991f1c4c750"),
+    features: ["Elevador privativo", "Janelas do piso ao teto", "Automação completa"],
+    image: unsplash("photo-1512917774080-9991f1c4c750", 1600),
     alt: "Sala de estar com janelas curvas do piso ao teto e vista panorâmica.",
   },
 ];
@@ -132,26 +147,26 @@ export const residences = [
 
 export const amenities = [
   {
-    title: "Wine Bar & Adega",
-    description: "Adega climatizada para 2.000 rótulos e sommelier residente.",
+    title: "Adega e wine bar",
+    description: "Adega climatizada com nichos para 400 garrafas e sala de degustação.",
     image: unsplash("photo-1414235077428-338989a2e8c0", 900),
     alt: "Adega climatizada com prateleiras de madeira escura e garrafas selecionadas.",
   },
   {
-    title: "Private Spa",
+    title: "Spa privativo",
     description: "Salas de massagem, sauna seca, vapor e hidromassagem.",
     image: unsplash("photo-1544161515-4ab6ce6db874", 900),
     alt: "Spa privativo com iluminação suave e paredes em pedra natural.",
   },
   {
-    title: "Wellness Center",
-    description: "Equipamentos de última geração e personal trainers residentes.",
+    title: "Espaço wellness",
+    description: "Musculação, estúdio de funcional e sala de alongamento.",
     image: unsplash("photo-1540497077202-7c8a3999166f", 900),
     alt: "Academia moderna com piso de madeira e espelhos do piso ao teto.",
   },
   {
     title: "Heliponto",
-    description: "Homologado para aeronaves de grande porte, com lounge de embarque.",
+    description: "Pouso e decolagem conforme a regulamentação da aviação civil, com lounge de embarque.",
     image: unsplash("photo-1486406146926-c627a92ad1ab", 900),
     alt: "Heliponto no topo de um edifício ao entardecer, com a metrópole ao fundo.",
   },
@@ -192,38 +207,29 @@ export const differentials = [
 /* ---------- Sobre ---------- */
 
 export const aboutStats = [
-  { value: 18, suffix: "", label: "Anos de mercado" },
-  { value: 42, suffix: "", label: "Empreendimentos entregues" },
-  { value: 1200, suffix: "+", label: "Famílias atendidas" },
-  { value: 3, suffix: "", label: "Tipologias exclusivas" },
+  { value: 1, suffix: "", label: "Torre" },
+  { value: 40, suffix: "", label: "Pavimentos" },
+  { value: 48, suffix: "", label: "Residências" },
+  { value: 3, suffix: "", label: "Tipologias" },
 ];
 
-/* ---------- Consultores ---------- */
+/* ---------- Atendimento ---------- */
 
-export const team = [
+export const services = [
   {
-    jobPosition: "Diretora de Novos Negócios",
-    firstName: "Helena",
-    lastName: "Duarte",
-    imageUrl: unsplash("photo-1573496359142-b8d87734a5a2", 800),
+    title: "Consultoria de vendas",
     description:
-      "Há 15 anos conduz lançamentos de alto padrão em São Paulo. Cuida pessoalmente de cada visita privativa ao decorado.",
+      "Um consultor acompanha você da primeira visita à assinatura do contrato, com plantas, memorial descritivo e condições por escrito.",
   },
   {
-    jobPosition: "Consultor Sênior de Investimentos",
-    firstName: "Ricardo",
-    lastName: "Albuquerque",
-    imageUrl: unsplash("photo-1472099645785-5658abf4ff4e", 800),
+    title: "Crédito e financiamento",
     description:
-      "Especialista em estruturação financeira e permutas. Encontra a melhor condição junto aos principais bancos do país.",
+      "Simulamos as condições com os principais bancos e explicamos cada etapa do financiamento antes de você decidir.",
   },
   {
-    jobPosition: "Arquiteta de Personalização",
-    firstName: "Beatriz",
-    lastName: "Moraes",
-    imageUrl: unsplash("photo-1438761681033-6461ffad8d80", 800),
+    title: "Personalização da unidade",
     description:
-      "Acompanha o memorial de personalização de cada unidade — revestimentos, marcenaria e automação sob medida.",
+      "Revestimentos, marcenaria e automação são definidos em conjunto com a equipe de arquitetura, dentro do memorial de personalização.",
   },
 ];
 
@@ -234,7 +240,7 @@ export const locationPoints = [
   { id: "gastronomia", label: "Polo gastronômico", minutes: 3, x: 64, y: 26 },
   { id: "escola", label: "Escola internacional", minutes: 8, x: 78, y: 62 },
   { id: "hospital", label: "Hospital de referência", minutes: 7, x: 30, y: 74 },
-  { id: "aeroporto", label: "Aeroporto executivo", minutes: 15, x: 88, y: 18 },
+  { id: "aeroporto", label: "Aeroporto de Congonhas", minutes: 15, x: 88, y: 18 },
 ];
 
 /* ---------- FAQ ---------- */
