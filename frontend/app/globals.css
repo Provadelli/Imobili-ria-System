@@ -253,3 +253,9 @@
     display: none;
   }
 }
+
+/* Seções abaixo da dobra só são renderizadas quando se aproximam da tela. */
+.defer-render {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}

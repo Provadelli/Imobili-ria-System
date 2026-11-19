@@ -7,7 +7,7 @@
  */
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { motion, useReducedMotion } from "motion/react";
+import { m, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 interface TeamMemberCardProps {
@@ -49,16 +49,16 @@ export default function TeamMemberCard({
 
   return (
     <article aria-label={fullName} className={cn("relative flex flex-col justify-center", className)}>
-      <motion.p
+      <m.p
         {...inView({ x: isRight ? 20 : -20 }, 0.05)}
         className={cn("eyebrow mb-5 text-bronze", isRight && "md:text-right")}
       >
         {jobPosition}
-      </motion.p>
+      </m.p>
 
       <div className={cn("flex flex-col md:flex-row md:items-center", isRight ? "md:justify-start" : "md:justify-end")}>
         {/* Retrato */}
-        <motion.div
+        <m.div
           {...inView({ scale: 0.95, y: 30 }, 0.1)}
           className={cn(
             "group relative aspect-[18/25] w-full shrink-0 overflow-hidden rounded-[2rem] md:w-[42%] lg:w-[22.5rem]",
@@ -73,10 +73,10 @@ export default function TeamMemberCard({
             sizes="(min-width: 1024px) 360px, (min-width: 768px) 42vw, 100vw"
             className="object-cover transition-[scale] duration-700 ease-(--ease-lux) group-hover:scale-105"
           />
-        </motion.div>
+        </m.div>
 
         {/* Bloco de informações — sobrepõe o retrato no desktop */}
-        <motion.div
+        <m.div
           {...inView({ x: isRight ? -40 : 40 }, 0.25)}
           className={cn(
             "relative z-[2] mt-8 flex flex-col gap-8 md:mt-0 md:flex-1 lg:gap-14",
@@ -113,7 +113,7 @@ export default function TeamMemberCard({
               {description}
             </p>
           </div>
-        </motion.div>
+        </m.div>
       </div>
     </article>
   );

@@ -2,7 +2,7 @@
 
 import { useId, useState } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { Dialog } from "radix-ui";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -42,14 +42,14 @@ export function CookieConsent() {
     <>
       <AnimatePresence>
         {showBanner && (
-          <motion.section
+          <m.section
             key="banner"
             aria-labelledby="cookie-title"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 24 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed inset-x-4 bottom-4 z-[90] max-w-md rounded-3xl border border-line bg-cream/95 p-6 text-ink shadow-[0_24px_60px_-20px_rgba(21,13,10,0.35)] backdrop-blur-xl sm:inset-x-auto sm:left-6 sm:bottom-6"
+            className="fixed inset-x-4 bottom-4 z-[90] max-w-md rounded-3xl border border-line bg-cream p-6 text-ink shadow-[0_24px_60px_-20px_rgba(21,13,10,0.35)] sm:inset-x-auto sm:left-6 sm:bottom-6"
           >
             <h2 id="cookie-title" className="font-display text-2xl">
               Sua privacidade importa
@@ -83,13 +83,13 @@ export function CookieConsent() {
                 Aceitar todos
               </Button>
             </div>
-          </motion.section>
+          </m.section>
         )}
       </AnimatePresence>
 
       <Dialog.Root open={preferencesOpen} onOpenChange={(open) => !open && closePreferences()}>
         <Dialog.Portal>
-          <Dialog.Overlay className="fixed inset-0 z-[95] bg-ink/40 backdrop-blur-sm data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0" />
+          <Dialog.Overlay className="fixed inset-0 z-[95] bg-ink/50 data-open:animate-in data-open:fade-in-0 data-closed:animate-out data-closed:fade-out-0" />
           <Dialog.Content className="fixed top-1/2 left-1/2 z-[96] max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-3xl bg-cream p-6 text-ink shadow-2xl sm:p-8 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95">
             {preferencesOpen && (
               <Preferences

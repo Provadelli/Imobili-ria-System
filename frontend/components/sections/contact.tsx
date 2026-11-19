@@ -2,7 +2,7 @@
 
 import { useRef, useState, type FormEvent, type ReactNode } from "react";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { ArrowUpRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Eyebrow, MaskText } from "@/components/reveal";
@@ -146,7 +146,7 @@ export function Contact() {
         <div className="lg:col-span-7">
           <AnimatePresence mode="wait">
             {submitted ? (
-              <motion.div
+              <m.div
                 key="ok"
                 role="status"
                 initial={{ opacity: 0, y: 20 }}
@@ -161,9 +161,9 @@ export function Contact() {
                   Um consultor da {site.name} entrará em contato em breve. Seus dados serão
                   usados apenas para este atendimento.
                 </p>
-              </motion.div>
+              </m.div>
             ) : (
-              <motion.form
+              <m.form
                 key="form"
                 ref={formRef}
                 noValidate
@@ -288,7 +288,7 @@ export function Contact() {
                     <ArrowUpRight data-arrow aria-hidden="true" />
                   </Button>
                 </div>
-              </motion.form>
+              </m.form>
             )}
           </AnimatePresence>
         </div>

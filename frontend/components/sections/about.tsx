@@ -5,7 +5,7 @@ import { aboutStats } from "@/lib/content";
 
 export function About() {
   return (
-    <section id="sobre" aria-labelledby="sobre-title" className="bg-sand py-28 lg:py-40">
+    <section id="sobre" aria-labelledby="sobre-title" className="defer-render bg-sand py-28 lg:py-40">
       <div className="mx-auto grid max-w-[90rem] grid-cols-1 gap-16 px-5 sm:px-8 lg:grid-cols-12 lg:gap-20 lg:px-12">
         <div className="lg:col-span-7">
           <Eyebrow index="06">Sobre a Atelier</Eyebrow>

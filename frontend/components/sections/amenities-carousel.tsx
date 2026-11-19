@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type KeyboardEvent } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion, type PanInfo } from "motion/react";
+import { AnimatePresence, m, useReducedMotion, type PanInfo } from "motion/react";
 import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { amenities } from "@/lib/content";
@@ -68,7 +68,7 @@ export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
       <div className="order-2 lg:order-1">
         <div aria-live={autoplay ? "off" : "polite"} aria-atomic="true" className="min-h-[11rem]">
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={current.title}
               initial={reduceMotion ? false : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
               </p>
               <h3 className="mt-5 font-display text-5xl font-light lg:text-6xl">{current.title}</h3>
               <p className="mt-4 max-w-sm text-base leading-relaxed text-cream/80">{current.description}</p>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
 
@@ -105,7 +105,7 @@ export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
           {/* Barra de tempo do autoplay */}
           <div aria-hidden="true" className="ml-4 h-px flex-1 overflow-hidden bg-cream/20">
             {autoplay && (
-              <motion.div
+              <m.div
                 key={index}
                 className="h-full origin-left bg-champagne"
                 initial={{ scaleX: 0 }}
@@ -123,7 +123,7 @@ export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
           const depth = (i - index + n) % n;
           const isTop = depth === 0;
           return (
-            <motion.div
+            <m.div
               key={item.title}
               role="group"
               aria-roledescription="slide"
@@ -155,7 +155,7 @@ export function AmenitiesCarousel({ items }: { items: typeof amenities }) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
               <span className="eyebrow absolute bottom-6 left-6 text-cream">{item.title}</span>
-            </motion.div>
+            </m.div>
           );
         })}
       </div>

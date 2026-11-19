@@ -316,12 +316,12 @@ export function SkylineChartInteractor({
         {/* Brilho ambiente */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute top-1/2 right-0 -z-0 h-[70%] w-[60%] -translate-y-1/2 rounded-full bg-champagne/10 blur-[120px]"
+          className="pointer-events-none absolute top-1/2 right-0 -z-0 h-[70%] w-[60%] -translate-y-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(201,173,132,0.12),transparent)]"
         />
 
-        <div className="relative grid items-center gap-6 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
+        <div className="relative grid grid-cols-[minmax(0,1fr)] items-center gap-6 lg:grid-cols-[1fr_1.05fr] lg:gap-16">
           {/* ESQUERDA: título + séries (tablist) */}
-          <div className="flex flex-col gap-5 lg:gap-12">
+          <div className="flex min-w-0 flex-col gap-5 lg:gap-12">
             <div>
               <p className="eyebrow flex items-center gap-4 text-champagne">
                 <span>02</span>

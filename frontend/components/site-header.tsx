@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { motion, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
+import { m, useMotionValueEvent, useReducedMotion, useScroll } from "motion/react";
 import { Dialog } from "radix-ui";
 import { ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -31,13 +31,13 @@ export function SiteHeader({ overHero = true }: { overHero?: boolean }) {
   const light = !solid;
 
   return (
-    <motion.header
+    <m.header
       initial={false}
       animate={{ y: hidden && !reduceMotion ? "-100%" : "0%" }}
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
-        solid ? "border-b border-line/60 bg-cream/85 backdrop-blur-xl" : "bg-transparent",
+        solid ? "border-b border-line/60 bg-cream/95" : "bg-transparent",
         light && "on-dark"
       )}
     >
@@ -118,7 +118,7 @@ export function SiteHeader({ overHero = true }: { overHero?: boolean }) {
                   <ul className="flex flex-col gap-2">
                     {navLinks.map((link, i) => (
                       <li key={link.href} className="overflow-hidden">
-                        <motion.div
+                        <m.div
                           initial={reduceMotion ? false : { y: "100%" }}
                           animate={{ y: "0%" }}
                           transition={{ duration: 0.8, delay: 0.1 + i * 0.06, ease: [0.22, 1, 0.36, 1] }}
@@ -134,7 +134,7 @@ export function SiteHeader({ overHero = true }: { overHero?: boolean }) {
                               {link.label}
                             </Link>
                           </Dialog.Close>
-                        </motion.div>
+                        </m.div>
                       </li>
                     ))}
                   </ul>
@@ -154,6 +154,6 @@ export function SiteHeader({ overHero = true }: { overHero?: boolean }) {
           </Dialog.Root>
         </div>
       </div>
-    </motion.header>
+    </m.header>
   );
 }

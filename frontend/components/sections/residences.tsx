@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, m } from "motion/react";
 import { ArrowUpRight, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Eyebrow, MaskText } from "@/components/reveal";
@@ -91,7 +91,7 @@ export function Residences() {
                 >
                   <AnimatePresence>
                     {isActive && (
-                      <motion.div
+                      <m.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0 }}
@@ -119,7 +119,7 @@ export function Residences() {
                             <ArrowUpRight data-arrow aria-hidden="true" />
                           </Link>
                         </Button>
-                      </motion.div>
+                      </m.div>
                     )}
                   </AnimatePresence>
                 </div>

@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import { ConsentProvider } from "@/hooks/use-consent";
 import { CookieConsent } from "@/components/cookie-consent";
-import { CustomCursor } from "@/components/custom-cursor";
+import { MotionProvider } from "@/components/motion-provider";
 import { JsonLd } from "@/components/json-ld";
 import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
@@ -61,11 +61,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Pular para o conteúdo
         </a>
-        <ConsentProvider>
-          {children}
-          <CookieConsent />
-        </ConsentProvider>
-        <CustomCursor />
+        <MotionProvider>
+          <ConsentProvider>
+            {children}
+            <CookieConsent />
+          </ConsentProvider>
+        </MotionProvider>
         <JsonLd />
       </body>
     </html>

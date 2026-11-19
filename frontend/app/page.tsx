@@ -1,6 +1,6 @@
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { ScrollProgress } from "@/components/scroll-progress";
+import { ScrollProgress } from "@/components/deferred";
 import { Hero } from "@/components/sections/hero";
 import { Manifesto } from "@/components/sections/manifesto";
 import { Market } from "@/components/sections/market";
