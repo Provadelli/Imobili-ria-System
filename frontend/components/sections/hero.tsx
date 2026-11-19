@@ -59,7 +59,7 @@ export function Hero() {
                     ? { y: 0, opacity: 1 }
                     : { y: wordIndex > index ? -40 : 40, opacity: 0 }
                 }
-                transition={{ type: "spring", stiffness: 60, damping: 14 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
               >
                 {word}
               </motion.span>
