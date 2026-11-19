@@ -94,13 +94,19 @@ Arquivos `.env*` não vão para o git.
 - ✅ Redesign institucional, carrossel, planta 3D, SEO técnico e CI (lint e build).
 - Limitação: a planta 3D é esquemática, serve para entender a distribuição e não para medir o projeto.
 - Limitação: as fotos não representam um empreendimento real.
-- Lighthouse medido localmente em mobile oscila entre 90 e 99 em Performance; Acessibilidade, Boas práticas e SEO ficam em 100. Medição no deploy: **pendente**.
+- Lighthouse no deploy de produção (19/11/2026, uma rodada por formato):
+
+| Formato | Performance | Acessibilidade | Boas práticas | SEO |
+|---|---|---|---|---|
+| Mobile | 99 | 100 | 100 | 100 |
+| Desktop | 100 | 100 | 100 | 100 |
+
+  No mobile: LCP de 1,1 s, TBT de 150 ms e CLS 0. A nota de Performance oscila entre rodadas.
 
 Próximos passos:
 
 1. Trocar dados e imagens de exemplo por reais.
-2. Medir Lighthouse no deploy e registrar aqui.
-3. Adicionar imagem Open Graph dedicada.
+2. Adicionar imagem Open Graph dedicada.
 
 ## Autor
 
