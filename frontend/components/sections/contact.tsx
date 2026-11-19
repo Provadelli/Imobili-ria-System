@@ -10,6 +10,19 @@ export function Contact() {
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const field = (name: string) => String(data.get(name) ?? "").trim();
+    const message = [
+      `Olá! Meu nome é ${field("nome")} e gostaria de agendar uma visita ao Reserva Imperiale.`,
+      `Interesse: ${field("tipologia")}.`,
+      `Telefone: ${field("telefone")}.`,
+      `E-mail: ${field("email")}.`,
+      field("mensagem") ? `Observações: ${field("mensagem")}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+    const url = `https://wa.me/${site.whatsappDigits}?text=${encodeURIComponent(message)}`;
+    window.open(url, "_blank", "noopener,noreferrer");
     setSubmitted(true);
   }
 
@@ -29,8 +42,8 @@ export function Contact() {
             Agende sua Visita Privativa
           </h2>
           <p className="text-body-md text-surface-variant">
-            Preencha o formulário abaixo para ser contatado por um de nossos
-            consultores imobiliários especializados.
+            Preencha os dados abaixo e continue a conversa pelo WhatsApp com um
+            dos nossos consultores.
           </p>
         </div>
 
@@ -40,8 +53,8 @@ export function Contact() {
             aria-live="polite"
             className="relative z-10 mx-auto max-w-lg text-center text-body-lg text-surface"
           >
-            Obrigado! Recebemos sua solicitação e um consultor da Atelier Residences
-            entrará em contato em breve.
+            Abrimos o WhatsApp com a sua mensagem pronta. Basta enviar para falar
+            com um consultor da Atelier Residences.
           </p>
         ) : (
           <form
@@ -58,7 +71,7 @@ export function Contact() {
                 type="text"
                 required
                 placeholder="Seu nome"
-                className="border-b border-outline-variant bg-surface/10 px-4 py-3 text-surface placeholder:text-surface/30 focus:border-secondary-fixed focus:outline-none"
+                className="border-b border-outline-variant bg-surface/10 px-4 py-3 text-surface placeholder:text-surface/60 focus:border-secondary-fixed focus:outline-none"
               />
             </div>
 
@@ -72,7 +85,7 @@ export function Contact() {
                 type="email"
                 required
                 placeholder="seu@email.com"
-                className="border-b border-outline-variant bg-surface/10 px-4 py-3 text-surface placeholder:text-surface/30 focus:border-secondary-fixed focus:outline-none"
+                className="border-b border-outline-variant bg-surface/10 px-4 py-3 text-surface placeholder:text-surface/60 focus:border-secondary-fixed focus:outline-none"
               />
             </div>
 
@@ -86,7 +99,7 @@ export function Contact() {
                 type="tel"
                 required
                 placeholder="(00) 00000-0000"
-                className="border-b border-outline-variant bg-surface/10 px-4 py-3 text-surface placeholder:text-surface/30 focus:border-secondary-fixed focus:outline-none"
+                className="border-b border-outline-variant bg-surface/10 px-4 py-3 text-surface placeholder:text-surface/60 focus:border-secondary-fixed focus:outline-none"
               />
             </div>
 
@@ -116,7 +129,7 @@ export function Contact() {
                 name="mensagem"
                 rows={3}
                 placeholder="Informe se prefere atendimento presencial ou online..."
-                className="resize-none border-b border-outline-variant bg-surface/10 px-4 py-3 text-surface placeholder:text-surface/30 focus:border-secondary-fixed focus:outline-none"
+                className="resize-none border-b border-outline-variant bg-surface/10 px-4 py-3 text-surface placeholder:text-surface/60 focus:border-secondary-fixed focus:outline-none"
               />
             </div>
 
@@ -126,15 +139,27 @@ export function Contact() {
                 className="w-full bg-secondary-container text-on-secondary-container uppercase tracking-wider hover:bg-surface hover:text-primary md:w-auto"
                 size="lg"
               >
-                Solicitar Atendimento Exclusivo
+                Continuar no WhatsApp
               </Button>
             </div>
           </form>
         )}
 
         <p className="relative z-10 mt-space-md text-center text-body-sm text-surface-variant">
-          Prefere falar agora? Ligue para {site.phone} ou fale pelo WhatsApp{" "}
-          {site.whatsapp}.
+          Prefere falar agora? Ligue para{" "}
+          <a href={site.phoneHref} className="underline underline-offset-4">
+            {site.phone}
+          </a>{" "}
+          ou chame no{" "}
+          <a
+            href={`https://wa.me/${site.whatsappDigits}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-4"
+          >
+            WhatsApp {site.whatsapp}
+          </a>
+          .
         </p>
       </Reveal>
     </section>

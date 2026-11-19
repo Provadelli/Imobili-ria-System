@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Menu, User } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -26,7 +26,7 @@ export function SiteHeader() {
   return (
     <header
       className={`fixed top-0 z-50 w-full transition-shadow ${
-        scrolled ? "bg-surface/90 shadow-[0_1px_8px_rgba(0,0,0,0.06)]" : "bg-surface/60"
+        scrolled ? "bg-surface/95 shadow-sm" : "bg-surface/80"
       } backdrop-blur-xl`}
     >
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-12">
@@ -61,12 +61,6 @@ export function SiteHeader() {
           >
             <a href="#contato">Agendar Visita</a>
           </Button>
-          <div
-            aria-hidden="true"
-            className="hidden size-8 items-center justify-center rounded-full bg-primary text-primary-foreground sm:flex"
-          >
-            <User className="size-4" />
-          </div>
 
           <Sheet>
             <SheetTrigger asChild>

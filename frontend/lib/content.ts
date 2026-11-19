@@ -2,10 +2,15 @@ export const site = {
   name: "Atelier Residences",
   shortName: "ATELIER",
   tagline: "Exclusividade e sofisticação em cada detalhe.",
+  // Dados de exemplo: substitua pelos reais antes da publicação definitiva.
   phone: "+55 (11) 4002-8922",
+  phoneHref: "tel:+551140028922",
   whatsapp: "+55 11 99999-0000",
+  whatsappDigits: "5511999990000",
   email: "concierge@atelierresidences.com.br",
-  address: "Av. Principal, nº 1000 — Bairro Nobre, São Paulo — SP",
+  address: "Av. Paulista, 1000 — Bela Vista, São Paulo — SP",
+  mapQuery: "Av. Paulista, 1000, São Paulo, SP",
+  creci: "CRECI 00000-J (exemplo)",
 };
 
 export const navLinks = [
@@ -33,31 +38,27 @@ export const heroWords = [
 
 export const highlights = [
   { icon: "BedDouble", value: "4 Suítes", label: "Master com Closet" },
-  { icon: "Ruler", value: "580m²", label: "Área Privativa" },
+  { icon: "Ruler", value: "até 680m²", label: "Área Privativa" },
   { icon: "CarFront", value: "4 Vagas", label: "Com Carregador EV" },
   { icon: "Eye", value: "360º", label: "Vista Panorâmica" },
 ];
 
 export const conceptImages = [
   {
-    src: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
-    alt: "Fachada iluminada de arranha-céu de luxo ao entardecer, com varandas amplas e paisagismo sofisticado.",
-    className: "h-72",
+    src: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=900&q=80",
+    alt: "Torre residencial moderna vista de baixo, com varandas amplas e fachada em vidro.",
   },
   {
     src: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=900&q=80",
     alt: "Piscina de borda infinita privativa no rooftop, com vista para o horizonte da cidade ao entardecer.",
-    className: "h-48",
   },
   {
     src: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80",
     alt: "Sala de estar ampla com pé-direito duplo, janelas do piso ao teto e mobiliário contemporâneo.",
-    className: "h-48",
   },
   {
     src: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=80",
     alt: "Hall de entrada sofisticado com painéis de madeira, iluminação indireta e piso em pedra polida.",
-    className: "h-72",
   },
 ];
 
@@ -95,7 +96,7 @@ export const residences = [
     name: "Garden Suites",
     description:
       "A sensação de morar em uma casa suspensa, com um exuberante terraço privativo arborizado.",
-    features: ["580m² de área total", "4 suítes Master", "4 vagas na garagem"],
+    features: ["580m² de área privativa", "4 suítes Master", "4 vagas na garagem"],
     image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=900&q=80",
     alt: "Apartamento garden com terraço privativo ajardinado e área de estar externa.",
   },
@@ -113,29 +114,29 @@ export const residences = [
 export const amenities = [
   {
     icon: "Wine",
-    title: "Wine Bar & Adega",
-    description: "Climatização dedicada e sommelier residente.",
+    title: "Adega e wine bar",
+    description: "Ambiente climatizado com nichos para 400 garrafas.",
     image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=800&q=80",
     alt: "Adega privativa climatizada com prateleiras de madeira escura e garrafas de vinho selecionadas.",
   },
   {
     icon: "Sparkles",
-    title: "Private Spa",
+    title: "Spa privativo",
     description: "Salas de massagem, sauna seca e hidromassagem.",
     image: "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=800&q=80",
     alt: "Ambiente de spa privativo com iluminação suave e paredes em pedra natural.",
   },
   {
     icon: "Dumbbell",
-    title: "Wellness Center",
+    title: "Espaço wellness",
     description: "Equipamentos de última geração e consultoria esportiva.",
     image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?auto=format&fit=crop&w=800&q=80",
     alt: "Academia moderna com equipamentos pretos, piso de madeira e espelhos do piso ao teto.",
   },
   {
     icon: "PlaneTakeoff",
-    title: "Heliponto Exclusivo",
-    description: "Homologado para aeronaves de grande porte.",
+    title: "Heliponto",
+    description: "Pouso e decolagem para uso dos moradores, conforme regulamentação.",
     image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
     alt: "Heliponto no topo de um edifício ao entardecer com vista para a metrópole iluminada.",
   },
@@ -188,7 +189,7 @@ export const faqs = [
   {
     question: "O Reserva Imperiale já possui data de entrega prevista?",
     answer:
-      "Sim. A previsão de entrega é para o quarto trimestre de 2028, com relatórios de obra trimestrais enviados a todos os proprietários.",
+      "Sim. A previsão de entrega é para o quarto trimestre de 2028, com relatórios mensais de obra enviados a todos os proprietários.",
   },
   {
     question: "É possível personalizar o acabamento da unidade?",

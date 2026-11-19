@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { Quote } from "lucide-react";
 import { testimonials } from "@/lib/content";
 
@@ -10,17 +10,16 @@ export function Testimonials() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
 
+  const prefersReducedMotion = useReducedMotion();
+
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
     if (paused || prefersReducedMotion) return;
 
     const id = setInterval(() => {
       setIndex((prev) => (prev + 1) % testimonials.length);
     }, 6000);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, prefersReducedMotion]);
 
   const current = testimonials[index];
 
@@ -39,7 +38,7 @@ export function Testimonials() {
           Depoimentos
         </span>
         <h2 id="depoimentos-heading" className="mb-space-lg font-heading text-headline-lg">
-          Quem já vive a experiência Atelier
+          O que dizem nossos clientes
         </h2>
 
         <Quote className="mx-auto mb-space-sm size-10 text-secondary-fixed" aria-hidden="true" />
@@ -57,7 +56,6 @@ export function Testimonials() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -16 }}
               transition={{ duration: 0.5 }}
-              aria-live="polite"
             >
               <blockquote className="mb-space-md font-light text-body-lg text-surface-variant">
                 &ldquo;{current.quote}&rdquo;
@@ -79,20 +77,31 @@ export function Testimonials() {
           </AnimatePresence>
         </div>
 
-        <div className="mt-space-md flex items-center justify-center gap-3">
+        <p className="sr-only" aria-live="polite">
+          {`Depoimento ${index + 1} de ${testimonials.length}`}
+        </p>
+        <div className="mt-space-md flex items-center justify-center gap-2">
           {testimonials.map((testimonial, i) => (
             <button
               key={testimonial.name}
               type="button"
               onClick={() => setIndex(i)}
               aria-label={`Ver depoimento de ${testimonial.name}`}
-              aria-current={i === index}
-              className={`size-2.5 rounded-full transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-secondary-fixed ${
-                i === index ? "bg-secondary-fixed" : "bg-surface/30"
-              }`}
-            />
+              aria-current={i === index ? "true" : undefined}
+              className="flex size-6 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-secondary-fixed"
+            >
+              <span
+                aria-hidden="true"
+                className={`size-2.5 rounded-full transition-colors ${
+                  i === index ? "bg-secondary-fixed" : "bg-surface/40"
+                }`}
+              />
+            </button>
           ))}
         </div>
+        <p className="mt-space-md text-body-sm text-surface-variant/80">
+          Depoimentos ilustrativos, apresentados como exemplo de conteúdo.
+        </p>
       </div>
     </section>
   );

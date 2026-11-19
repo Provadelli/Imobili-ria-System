@@ -2,34 +2,33 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import { useScroll, useTransform, motion, type MotionValue } from "motion/react";
+import { useScroll, useTransform, useReducedMotion, motion, type MotionValue } from "motion/react";
 import { conceptImages, differentials } from "@/lib/content";
 
 interface PanelProps {
   scrollYProgress: MotionValue<number>;
+  reduce: boolean;
 }
 
-function ConceptPanel({ scrollYProgress }: PanelProps) {
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [0, -3]);
+function ConceptPanel({ scrollYProgress, reduce }: PanelProps) {
+  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.94]);
 
   return (
     <motion.div
-      style={{ scale, rotate }}
-      className="sticky top-0 flex h-screen flex-col justify-center bg-surface-container-low px-6 lg:px-12"
+      style={reduce ? undefined : { scale }}
+      className="sticky top-0 flex h-dvh flex-col justify-center bg-surface-container-low px-6 lg:px-12"
     >
       <div className="mx-auto grid w-full max-w-7xl gap-4">
-        <span className="text-label-md uppercase tracking-[0.2em] text-secondary">
+        <span className="text-label-md uppercase tracking-[0.2em] text-secondary-foreground">
           Conceito Arquitetônico
         </span>
         <h2 className="max-w-2xl font-heading text-headline-lg text-primary">
-          Onde a arte encontra a alta engenharia residencial.
+          Projeto autoral, materiais que envelhecem bem.
         </h2>
         <p className="max-w-xl font-light leading-relaxed text-body-lg text-on-surface-variant">
-          Cada linha do Reserva Imperiale foi meticulosamente desenhada para estabelecer
-          um novo padrão de elegância. Materiais nobres como mármore italiano Calacatta,
-          painéis em madeira maciça e brises pivotantes criam uma fachada viva e
-          imponente.
+          A fachada combina mármore, painéis de madeira maciça e brises pivotantes que
+          controlam a luz do sol ao longo do dia. Cada pavimento tem poucas unidades,
+          com plantas amplas e vista aberta.
         </p>
         <div className="grid max-w-xl grid-cols-2 gap-6 border-t border-outline-variant/30 pt-6">
           {differentials.slice(0, 2).map((item) => (
@@ -46,18 +45,17 @@ function ConceptPanel({ scrollYProgress }: PanelProps) {
   );
 }
 
-function GalleryPanel({ scrollYProgress }: PanelProps) {
-  const scale = useTransform(scrollYProgress, [0, 1], [0.92, 1]);
-  const rotate = useTransform(scrollYProgress, [0, 1], [3, 0]);
+function GalleryPanel({ scrollYProgress, reduce }: PanelProps) {
+  const scale = useTransform(scrollYProgress, [0, 1], [0.94, 1]);
 
   return (
     <motion.div
-      style={{ scale, rotate }}
-      className="relative h-screen bg-primary px-6 py-16 text-surface lg:px-12"
+      style={reduce ? undefined : { scale }}
+      className="relative h-dvh bg-primary px-6 py-16 text-surface lg:px-12"
     >
-      <div className="mx-auto grid h-full max-w-7xl grid-cols-2 gap-4">
+      <div className="mx-auto grid h-full max-w-7xl grid-cols-2 grid-rows-2 gap-4">
         {conceptImages.map((image) => (
-          <div key={image.alt} className={`relative overflow-hidden rounded-xl ${image.className}`}>
+          <div key={image.alt} className="relative overflow-hidden rounded-xl">
             <Image
               src={image.src}
               alt={image.alt}
@@ -74,15 +72,16 @@ function GalleryPanel({ scrollYProgress }: PanelProps) {
 
 export function ScrollShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion() ?? false;
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
   });
 
   return (
-    <section id="empreendimento" ref={containerRef} className="relative h-[220vh] w-full">
-      <ConceptPanel scrollYProgress={scrollYProgress} />
-      <GalleryPanel scrollYProgress={scrollYProgress} />
+    <section id="empreendimento" ref={containerRef} className="relative h-[200dvh] w-full scroll-mt-20">
+      <ConceptPanel scrollYProgress={scrollYProgress} reduce={reduce} />
+      <GalleryPanel scrollYProgress={scrollYProgress} reduce={reduce} />
     </section>
   );
 }
