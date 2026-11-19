@@ -14,8 +14,9 @@ export function Market() {
         years={marketYears}
         image={skylinePhoto}
         source={marketSource}
-        eyebrow="O Mercado"
-        heading={["Dados que viram", "arquitetura."]}
+        eyebrow="O projeto em números"
+        heading={["Medidas que viram", "arquitetura."]}
+        axisHeading="Pavimento"
       />
     </div>
   );

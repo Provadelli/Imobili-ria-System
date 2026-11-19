@@ -33,7 +33,8 @@ export type SkylineSeries = {
 
 type Props = {
   series: SkylineSeries[];
-  years: number[];
+  years: (number | string)[];
+  axisHeading?: string;
   image: string;
   source?: string;
   eyebrow?: string;
@@ -133,6 +134,7 @@ const toHeightObj = (h: number[]) => Object.fromEntries(h.map((v, i) => [`h${i}`
 export function SkylineChartInteractor({
   series,
   years,
+  axisHeading = "Ano",
   image,
   source,
   eyebrow = "Mercado",
@@ -514,7 +516,7 @@ export function SkylineChartInteractor({
                     aria-hidden="true"
                     className="font-sans"
                   >
-                    {String(year).slice(2)}&apos;
+                    {typeof year === "number" ? `${String(year).slice(2)}'` : year}
                   </text>
                 ))}
               </svg>
@@ -531,7 +533,7 @@ export function SkylineChartInteractor({
               </caption>
               <thead>
                 <tr>
-                  <th scope="col">Ano</th>
+                  <th scope="col">{axisHeading}</th>
                   <th scope="col">Valor</th>
                 </tr>
               </thead>

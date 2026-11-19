@@ -95,7 +95,12 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-4 border-t border-cream/15 py-8 text-xs text-cream/65 sm:flex-row sm:items-center sm:justify-between">
+        <p className="border-t border-cream/15 pt-8 text-xs leading-relaxed text-cream/65">
+          Reserva Imperiale é um empreendimento fictício, criado para demonstração. Imagens
+          meramente ilustrativas; CNPJ, CRECI, telefones e endereço são dados de exemplo.
+        </p>
+
+        <div className="flex flex-col gap-4 py-6 text-xs text-cream/65 sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {new Date().getFullYear()} {site.legalName} · CNPJ {site.cnpj} · {site.creci}
           </p>

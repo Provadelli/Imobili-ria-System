@@ -46,7 +46,7 @@ export function Hero() {
         <p className="eyebrow mb-8 flex motion-safe:animate-fade-rise [animation-delay:200ms] items-center gap-4 text-champagne">
           <span>Reserva Imperiale</span>
           <span aria-hidden="true" className="h-px w-10 bg-current opacity-60" />
-          <span>Lançamento 2028</span>
+          <span>Entrega prevista em 2028</span>
         </p>
 
         <h1 id="hero-title" className="font-display text-display font-light">

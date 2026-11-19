@@ -1,30 +1,37 @@
-import TeamMemberCard from "@/components/ui/team-member-card";
-import { Eyebrow, MaskText } from "@/components/reveal";
-import { team } from "@/lib/content";
+import { Eyebrow, MaskText, Reveal } from "@/components/reveal";
+import { services } from "@/lib/content";
 
 export function Team() {
   return (
-    <section id="consultores" aria-labelledby="consultores-title" className="defer-render bg-cream py-28 lg:py-40">
+    <section id="atendimento" aria-labelledby="atendimento-title" className="defer-render bg-cream py-28 lg:py-40">
       <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div>
-            <Eyebrow index="07">Consultores</Eyebrow>
+            <Eyebrow index="07">Atendimento</Eyebrow>
             <MaskText
-              id="consultores-title"
-              lines={["Pessoas que", <em key="i" className="italic">conhecem cada metro.</em>]}
+              id="atendimento-title"
+              lines={["Do primeiro contato", <em key="i" className="italic">à entrega das chaves.</em>]}
               className="mt-6 font-display text-title font-light"
             />
           </div>
           <p className="max-w-sm text-base leading-relaxed text-stone">
-            Um único consultor acompanha você da primeira visita à entrega das chaves.
+            Três frentes de atendimento, com um consultor responsável por todo o processo.
           </p>
         </div>
 
-        <div className="mt-20 flex flex-col gap-28 lg:mt-28 lg:gap-36">
-          {team.map((member, i) => (
-            <TeamMemberCard key={member.firstName} position={i % 2 ? "right" : "left"} {...member} />
+        <ol className="mt-16 grid gap-px overflow-hidden rounded-[2rem] border border-line bg-line lg:mt-24 lg:grid-cols-3">
+          {services.map((service, i) => (
+            <Reveal key={service.title} delay={i * 0.08} className="bg-cream p-8 lg:p-10">
+              <li className="list-none">
+                <span className="font-display text-5xl font-light text-bronze" aria-hidden="true">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-8 font-display text-2xl font-light">{service.title}</h3>
+                <p className="mt-4 text-base leading-relaxed text-stone">{service.description}</p>
+              </li>
+            </Reveal>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );

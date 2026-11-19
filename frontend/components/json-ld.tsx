@@ -14,7 +14,7 @@ export function JsonLd() {
         email: site.email,
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Av. Paulista, 1000",
+          streetAddress: site.street,
           addressLocality: "São Paulo",
           addressRegion: "SP",
           addressCountry: "BR",
