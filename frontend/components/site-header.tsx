@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,16 +16,20 @@ import { navLinks, site } from "@/lib/content";
 
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const { scrollY } = useScroll();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  useMotionValueEvent(scrollY, "change", (y) => {
+    const prev = scrollY.getPrevious() ?? 0;
+    setScrolled(y > 8);
+    setHidden(y > 240 && y > prev);
+  });
 
   return (
-    <header
+    <motion.header
+      animate={{ y: hidden ? "-100%" : "0%" }}
+      transition={{ duration: 0.35, ease: "easeOut" }}
+      onFocusCapture={() => setHidden(false)}
       className={`fixed top-0 z-50 w-full transition-shadow ${
         scrolled ? "bg-surface/95 shadow-sm" : "bg-surface/80"
       } backdrop-blur-xl`}
@@ -98,6 +103,6 @@ export function SiteHeader() {
           </Sheet>
         </div>
       </div>
-    </header>
+    </motion.header>
   );
 }

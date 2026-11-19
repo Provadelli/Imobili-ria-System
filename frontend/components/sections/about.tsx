@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { aboutStats } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
+import { CountUp } from "@/components/count-up";
 
 export function About() {
   return (
@@ -43,7 +44,9 @@ export function About() {
                 <dt className="text-body-sm uppercase tracking-wider text-on-surface-variant">
                   {stat.label}
                 </dt>
-                <dd className="font-heading text-headline-md text-primary">{stat.value}</dd>
+                <dd className="font-heading text-headline-lg text-primary">
+                  <CountUp value={stat.value} />
+                </dd>
               </div>
             ))}
           </dl>
