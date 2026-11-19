@@ -1,13 +1,17 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
-import { siteUrl } from "@/lib/site-url";
+import { Cormorant_Garamond, Inter } from "next/font/google";
+import { ConsentProvider } from "@/hooks/use-consent";
+import { CookieConsent } from "@/components/cookie-consent";
+import { CustomCursor } from "@/components/custom-cursor";
 import { JsonLd } from "@/components/json-ld";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
-const headingFont = Playfair_Display({
-  variable: "--font-heading",
+const displayFont = Cormorant_Garamond({
+  variable: "--font-display",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -17,30 +21,25 @@ const bodyFont = Inter({
   display: "swap",
 });
 
-const description =
-  "Reserva Imperiale: residências de 520 a 680m² na Avenida Paulista, São Paulo. Conheça plantas, comodidades e agende uma visita com a Atelier Residences.";
-
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   title: {
-    default: "Reserva Imperiale | Atelier Residences — Imóveis de alto padrão em São Paulo",
+    default: "Atelier Residences | Reserva Imperiale",
     template: "%s | Atelier Residences",
   },
-  description,
-  alternates: { canonical: "/" },
+  description:
+    "Imobiliária de alto padrão em São Paulo. Conheça o Reserva Imperiale: coberturas, gardens e andares inteiros com arquitetura autoral e atendimento sob medida.",
   openGraph: {
     type: "website",
     locale: "pt_BR",
     siteName: "Atelier Residences",
-    title: "Reserva Imperiale | Atelier Residences",
-    description,
+    title: "Atelier Residences | Reserva Imperiale",
+    description: "Arquitetura autoral e atendimento sob medida. Agende sua visita privativa.",
     url: "/",
   },
-  twitter: {
-    card: "summary_large_image",
-    title: "Reserva Imperiale | Atelier Residences",
-    description,
-  },
+  twitter: { card: "summary_large_image", title: "Atelier Residences | Reserva Imperiale" },
+  robots: { index: true, follow: true },
 };
 
 export const viewport: Viewport = {
@@ -53,16 +52,20 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="pt-BR"
-      className={`${headingFont.variable} ${bodyFont.variable} h-full antialiased`}
+      className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-surface text-on-surface">
+      <body className="flex min-h-full flex-col bg-cream text-ink">
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:top-4 focus:left-4 focus:rounded focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground"
+          className="sr-only rounded-full bg-ink px-5 py-3 text-sm text-cream focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100]"
         >
           Pular para o conteúdo
         </a>
-        {children}
+        <ConsentProvider>
+          {children}
+          <CookieConsent />
+        </ConsentProvider>
+        <CustomCursor />
         <JsonLd />
       </body>
     </html>

@@ -1,24 +1,25 @@
 import { amenities } from "@/lib/content";
-import { Reveal } from "@/components/reveal";
 import { AmenitiesCarousel } from "@/components/sections/amenities-carousel";
+import { Eyebrow, MaskText } from "@/components/reveal";
 
 export function Amenities() {
   return (
-    <section id="comodidades" aria-labelledby="amenidades-heading" className="mx-auto max-w-7xl px-6 py-space-xl lg:px-12">
-      <Reveal className="mx-auto mb-space-lg max-w-2xl text-center">
-        <span className="mb-space-xs block text-label-md uppercase tracking-[0.2em] text-secondary-foreground">
-          Comodidades
-        </span>
-        <h2 id="amenidades-heading" className="mb-4 font-heading text-headline-lg text-primary">
-          Áreas comuns pensadas para o dia a dia
-        </h2>
-        <p className="text-body-md text-on-surface-variant">
-          Adega, spa, academia e heliponto dentro do condomínio, para usar sem
-          precisar sair de casa.
-        </p>
-      </Reveal>
-
-      <AmenitiesCarousel items={amenities} />
+    <section
+      id="experiencias"
+      aria-labelledby="experiencias-title"
+      className="on-dark overflow-hidden bg-ink py-28 text-cream lg:py-40"
+    >
+      <div className="mx-auto max-w-[90rem] px-5 sm:px-8 lg:px-12">
+        <Eyebrow index="05" className="text-champagne">
+          Experiências
+        </Eyebrow>
+        <MaskText
+          id="experiencias-title"
+          lines={["Um clube privado", <em key="i" className="italic">dentro de casa.</em>]}
+          className="mt-6 mb-16 font-display text-title font-light lg:mb-24"
+        />
+        <AmenitiesCarousel items={amenities} />
+      </div>
     </section>
   );
 }
