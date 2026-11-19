@@ -2,6 +2,7 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import { residences } from "@/lib/content";
 import { Reveal } from "@/components/reveal";
+import { TiltCard } from "@/components/tilt-card";
 
 export function Residences() {
   return (
@@ -29,7 +30,8 @@ export function Residences() {
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
           {residences.map((unit, index) => (
             <Reveal key={unit.name} delay={index * 0.1}>
-              <article className="group flex h-full flex-col overflow-hidden rounded-xl bg-surface shadow-xl transition-all duration-300 hover:-translate-y-1">
+              <TiltCard className="h-full">
+              <article className="group flex h-full flex-col overflow-hidden rounded-xl bg-surface shadow-xl transition-shadow duration-300 hover:shadow-2xl">
                 <div className="relative h-72 overflow-hidden">
                   <Image
                     src={unit.image}
@@ -67,6 +69,7 @@ export function Residences() {
                   </a>
                 </div>
               </article>
+              </TiltCard>
             </Reveal>
           ))}
         </div>

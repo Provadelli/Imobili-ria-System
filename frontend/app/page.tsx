@@ -11,14 +11,18 @@ import { Location } from "@/components/sections/location";
 import { Testimonials } from "@/components/sections/testimonials";
 import { Faq } from "@/components/sections/faq";
 import { Contact } from "@/components/sections/contact";
+import { ScrollProgress } from "@/components/scroll-progress";
+import { Marquee } from "@/components/marquee";
 
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
       <SiteHeader />
       <main id="main-content" className="flex w-full flex-col">
         <Hero />
         <HighlightsBar />
+        <Marquee />
         <ScrollShowcase />
         <About />
         <Differentials />
