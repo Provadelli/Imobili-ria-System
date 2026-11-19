@@ -3,6 +3,8 @@ import { Cormorant_Garamond, Inter } from "next/font/google";
 import { ConsentProvider } from "@/hooks/use-consent";
 import { CookieConsent } from "@/components/cookie-consent";
 import { CustomCursor } from "@/components/custom-cursor";
+import { JsonLd } from "@/components/json-ld";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const displayFont = Cormorant_Garamond({
@@ -20,7 +22,8 @@ const bodyFont = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://atelierresidences.com.br"),
+  metadataBase: new URL(siteUrl),
+  alternates: { canonical: "/" },
   title: {
     default: "Atelier Residences | Reserva Imperiale",
     template: "%s | Atelier Residences",
@@ -33,7 +36,9 @@ export const metadata: Metadata = {
     siteName: "Atelier Residences",
     title: "Atelier Residences | Reserva Imperiale",
     description: "Arquitetura autoral e atendimento sob medida. Agende sua visita privativa.",
+    url: "/",
   },
+  twitter: { card: "summary_large_image", title: "Atelier Residences | Reserva Imperiale" },
   robots: { index: true, follow: true },
 };
 
@@ -61,6 +66,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <CookieConsent />
         </ConsentProvider>
         <CustomCursor />
+        <JsonLd />
       </body>
     </html>
   );
